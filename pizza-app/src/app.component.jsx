@@ -6,12 +6,14 @@ import {StyledHeader} from "./header/header.style";
 import {Header} from "./header/header.component";
 import {Footer} from "./footer/footer.component";
 import {Delivery} from "./delivery/delivery.component";
+import {MenuBar} from "./menuBar/menuBar.component";
 
 export const App = () => {
 	return (
 		<Router>
 			<StyledAppContainer>
 				<Header />
+				<MenuBar />
 				<Delivery />
 				<Footer />
 			</StyledAppContainer>

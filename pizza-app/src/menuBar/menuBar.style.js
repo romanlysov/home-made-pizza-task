@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
-export const StyledHeader = styled.div`
+export const StyledMenuBar = styled.div`
 	display: flex;
     flex-direction: row;
     justify-content: space-around;
+    height: 500px;
     align-items:center;
-    font-family: "Red Hat Display";
-    background: #572000;
 `

@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-export const StyledDelivery = styled.div`
+export const StyledDeliveryDescription = styled.div`
 	margin-top: 45px;
 	margin-bottom: 45px;
-	width: 1000;
-	height: 688;
+	height: 566px;
+	width: 1200px;
 	display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
+    background: #F9F0DC;
 	`;
