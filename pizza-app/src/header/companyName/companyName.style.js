@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import {companyName} from "../images";
 
 export const StyledCompanyName = styled.div`
-	width: 396px;
+    font: normal 130% 'Lobster-Regular', sans-serif;
+    color: rgb(251,232,191);
+    font-size: 2.5em;
 	height: 57px;
-	background: url(${companyName}) center no-repeat;
 `;

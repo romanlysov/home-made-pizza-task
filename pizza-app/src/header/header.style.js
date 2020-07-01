@@ -5,9 +5,7 @@ export const StyledHeader = styled.div`
 	width: 100%;
 	top: 0px;
 	display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items:center;
-    font-family: "Red Hat Display";
+	position: fixed;
     background: #572000;
+    width: 100%;
 `

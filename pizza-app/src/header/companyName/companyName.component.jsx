@@ -3,6 +3,8 @@ import {StyledCompanyName} from "./companyName.style";
 
 export const CompanyName = () => {
 	return(
-		<StyledCompanyName />
+		<StyledCompanyName>
+			HomeMadePizza
+		</StyledCompanyName>
 	)
 }
