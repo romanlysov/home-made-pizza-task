@@ -7,13 +7,19 @@ import {Header} from "./header/header.component";
 import {Footer} from "./footer/footer.component";
 import {Delivery} from "./delivery/delivery.component";
 import {MenuBar} from "./menuBar/menuBar.component";
+import {DescribeFrontImage} from "./describeFrontImage/describeFrontImage.component";
+import {StyledMenuBar} from "./menuBar/menuBar.style";
+import {StyledDelivery} from "./delivery/delivery.style";
 
 export const App = () => {
 	return (
 		<Router>
 			<StyledAppContainer>
 				<Header />
+				<DescribeFrontImage />
+				<a name="menu" />
 				<MenuBar />
+				<a name='delivery' />
 				<Delivery />
 				<Footer />
 			</StyledAppContainer>
