@@ -1,10 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
-import {StyledMenuAndScheduleHeader} from "./menuAndScheduleHeader.style";
-import {MainMenu} from "./mainMenu/mainMenu.component";
-=======
 import {StyledMenuAndScheduleHeader, Menu, ElementOfMenu} from "./menuAndScheduleHeader.style";
->>>>>>> nikita
 
 
 export const MenuAndScheduleHeader = () => {
