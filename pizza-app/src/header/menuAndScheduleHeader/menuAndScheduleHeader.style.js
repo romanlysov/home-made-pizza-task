@@ -12,16 +12,19 @@ export const StyledMenuAndScheduleHeader = styled.div`
     width: 40%;
     height: 100%;
 `;
-export const Menu = styled.div`
+export const StyledMenu = styled.div`
     font: normal 130% 'trebuchet ms', sans-serif;
     display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     height: 20px;
     padding: 6px 35px 5px 28px;
     color: white;
     list-style: none;
     text-decoration: none ;
+    width: 40%;
 `;
-export const ElementOfMenu = styled.div`
+export const StyledElementOfMenu = styled.div`
     font: normal 100% 'trebuchet ms', sans-serif;
     color: rgb(251, 232, 191);
     letter-spacing: 0.1em;

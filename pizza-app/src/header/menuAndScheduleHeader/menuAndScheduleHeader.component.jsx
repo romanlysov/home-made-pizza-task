@@ -1,18 +1,18 @@
 import React from 'react';
-import {StyledMenuAndScheduleHeader, Menu, ElementOfMenu} from "./menuAndScheduleHeader.style";
+import {StyledMenuAndScheduleHeader, StyledMenu, StyledElementOfMenu} from "./menuAndScheduleHeader.style";
 
 
 export const MenuAndScheduleHeader = () => {
 	return(
 		<StyledMenuAndScheduleHeader>
 			<p>Время работы: 09:00 - 21:00</p>
-			<Menu>
-				<li><a href="#"><ElementOfMenu>Главная</ElementOfMenu></a></li>
-				<li><a href="#"><ElementOfMenu>Меню</ElementOfMenu></a></li>
-				<li><a href="#"><ElementOfMenu>О нас</ElementOfMenu></a></li>
-				<li><a href="#"><ElementOfMenu>Доставка</ElementOfMenu></a></li>
-				<li><a href="#"><ElementOfMenu>Контакты</ElementOfMenu></a></li>
-			</Menu>
+			<StyledMenu>
+				<li><a href="#"><StyledElementOfMenu>Главная</StyledElementOfMenu></a></li>
+				<li><a href="#"><StyledElementOfMenu>Меню</StyledElementOfMenu></a></li>
+				<li><a href="#"><StyledElementOfMenu>О нас</StyledElementOfMenu></a></li>
+				<li><a href="#"><StyledElementOfMenu>Доставка</StyledElementOfMenu></a></li>
+				<li><a href="#"><StyledElementOfMenu>Контакты</StyledElementOfMenu></a></li>
+			</StyledMenu>
 		</StyledMenuAndScheduleHeader>
 	)
 }
