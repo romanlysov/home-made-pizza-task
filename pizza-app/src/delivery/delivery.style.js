@@ -8,5 +8,4 @@ export const StyledDelivery = styled.div`
 	display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin: 45px 5% 20px;
 	`;
