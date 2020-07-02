@@ -4,7 +4,13 @@ import {closedPizzaIcon, openPizzaIcon, drinksIcon} from "./images";
 import {MenuButton} from "./menuButton.component";
 
 export const MenuBar = () => <StyledMenuBar>
-	<MenuButton background={closedPizzaIcon} />
-	<MenuButton background={openPizzaIcon} />
-	<MenuButton background={drinksIcon} />
+	<a href="#ClosedPizza">
+		<MenuButton background={closedPizzaIcon} />
+	</a>
+	<a href="#OpenPizza">
+		<MenuButton background={openPizzaIcon} />
+	</a>
+	<a href="#Drinks">
+		<MenuButton background={drinksIcon} />
+	</a>
 </StyledMenuBar>;
