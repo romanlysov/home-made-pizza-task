@@ -10,6 +10,7 @@ import {MenuBar} from "./menuBar/menuBar.component";
 import {DescribeFrontImage} from "./describeFrontImage/describeFrontImage.component";
 import {ContentBlock} from "./contentBlock/contentBlock.component";
 import {openPizzaLabelImage, closedPizzaLabelImage, drinksLabelImage} from "./contentBlock/images";
+import {AboutUs} from "./aboutUs/aboutUs.component";
 
 export const App = () => {
 	const pps=[
@@ -57,6 +58,8 @@ export const App = () => {
 				<ContentBlock labelImage = {drinksLabelImage} items = {pps} />
 				<a name="delivery" />
 				<Delivery />
+				<a name = "about" />
+				<AboutUs />
 				<Footer />
 			</StyledAppContainer>
 		</Router>
