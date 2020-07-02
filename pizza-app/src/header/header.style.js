@@ -5,6 +5,7 @@ export const StyledHeader = styled.div`
 	position: fixed;
     background: #572000;
     width: 100%;
+    height: 15%;
 `;
 export const StyledLogoCompany = styled.div`
     display: flex;

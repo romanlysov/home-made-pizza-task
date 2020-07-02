@@ -2,9 +2,9 @@ import styled from "styled-components";
 import {logoImage} from "../images";
 
 export const StyledLogo = styled.div`
-	width: 130px;
-    height: 130px;
+	width: 100px;
+    height: auto;
     flex: auto;
     background: url(${logoImage}) center no-repeat;
-    background-size: 120px 120px;
+    background-size: 90% 90%;
 `;
