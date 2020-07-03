@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 
 export const StyledMenuAndScheduleHeader = styled.div`
-
     display: flex;
     flex-direction: column;
     font-family: "Red Hat Display";
