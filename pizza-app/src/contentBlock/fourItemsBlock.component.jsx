@@ -10,10 +10,10 @@ export function FourItemsBlock(props) {
 	// console.log(child1);
 	// console.log(child2);
 	// console.log(props);
-	return <StyledFourItemsBlock>
-		<ItemCard item = {items[0]} />
-		<ItemCard item = {items[1]} />
-		<ItemCard item = {items[2]} />
-		<ItemCard item = {items[3]} />
-	</StyledFourItemsBlock>;
+	if(items!==undefined){
+		return <StyledFourItemsBlock>
+			{items.map(item => <ItemCard item = {item} />)}
+		</StyledFourItemsBlock>;
+	}
+	return <StyledFourItemsBlock />;
 }
