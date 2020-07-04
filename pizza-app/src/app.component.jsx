@@ -84,6 +84,20 @@ export class App extends React.Component {
 		});
 	}
 
+	cartClosingHadler = () => {
+		console.log("cartClosingHadler entered");
+		console.log(this.state);
+		this.setState((state)=>{
+			const {productList} = state;
+			const newState ={
+				isCartOpen: false,
+				productList
+			};
+			// newState.isCartOpen = true;
+			return newState;
+		});
+	}
+
 	render() {
 		console.log("App render entered");
 		const pps = [
@@ -150,7 +164,7 @@ export class App extends React.Component {
 							console.log(isCartOpen);
 							if(isCartOpen) {
 								return <StyledShadow>
-									<Cart />
+									<Cart onClose ={this.cartClosingHadler}/>
 								</StyledShadow>;
 							}
 							return "";
