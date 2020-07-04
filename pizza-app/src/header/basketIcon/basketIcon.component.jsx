@@ -1,8 +1,10 @@
 import React from 'react';
 import {StyledBasketIcon} from "./basketIcon.style";
+import {MenuAndScheduleHeader} from "../menuAndScheduleHeader/menuAndScheduleHeader.component";
 
-export const BasketIcon = () => {
+export function BasketIcon(props) {
+	const {onCartIconClick}=props;
 	return(
-		<StyledBasketIcon />
+		<StyledBasketIcon onClick={onCartIconClick}/>
 	)
 }

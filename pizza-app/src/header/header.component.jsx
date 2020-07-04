@@ -5,11 +5,18 @@ import {MenuAndScheduleHeader} from "./menuAndScheduleHeader/menuAndScheduleHead
 import {BasketIcon} from "./basketIcon/basketIcon.component";
 import {Logo} from "./logo/logo.component";
 
-export const Header = () => <StyledHeader>
-	<StyledLogoCompany>
-		<Logo />
-		<CompanyName />
-	</StyledLogoCompany>
-	<MenuAndScheduleHeader />
-	<BasketIcon />
-</StyledHeader>;
+export function Header(props){
+	console.log("Header props");
+	console.log(props);
+	const {onCartIconClick} = props;
+	return <StyledHeader>
+		<StyledLogoCompany>
+			<Logo />
+			<CompanyName />
+		</StyledLogoCompany>
+		<MenuAndScheduleHeader />
+		<BasketIcon onCartIconClick = {onCartIconClick} />
+	</StyledHeader>;
+
+
+}

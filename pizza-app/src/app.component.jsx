@@ -12,12 +12,21 @@ import {ContentBlock} from "./contentBlock/contentBlock.component";
 import {openPizzaLabelImage, closedPizzaLabelImage, drinksLabelImage} from "./contentBlock/images";
 import {AboutUs} from "./aboutUs/aboutUs.component";
 import {getJson} from "./services";
+import {Modal} from "./modal/modal.component";
+import {StyledShadow} from "./modal/modal.style";
+import {Cart} from "./cart/cart.component";
 
 export class App extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {openPizza:[], closedPizza:[]};
-
+		this.state = {
+			/* productList: {
+				openPizza: [],
+				closedPizza: []
+			}, */
+			isCartOpen: false
+		};
+		// this.state = {openPizza:[], closedPizza:[]};
 	}
 
 	componentDidMount() {
@@ -41,8 +50,15 @@ export class App extends React.Component {
 				}
 				return acc;
 			}, {pizza: [], drinks: []});
-			this.setState(groupedProducts);
+			this.setState((state)=>{
+				const newState = {
+					...this.state,
+					productList: groupedProducts
+				};
+				return newState;
+			});
 			// this.state=groupedProducts;
+			console.log("this.state");
 			console.log(this.state);
 			// this.render();
 		});
@@ -54,7 +70,22 @@ export class App extends React.Component {
 		console.log(this.state);
 	}
 
+	cartOpeningHadler = () => {
+		console.log("cartOpeningHadler entered");
+		console.log(this.state);
+		this.setState((state)=>{
+			const {productList} = state;
+			const newState ={
+				isCartOpen: true,
+				productList
+			};
+			// newState.isCartOpen = true;
+			return newState;
+		});
+	}
+
 	render() {
+		console.log("App render entered");
 		const pps = [
 			{
 				productName: "Мясная",
@@ -85,18 +116,18 @@ export class App extends React.Component {
 				ingredients: "Неаполитанский соус, сервелат, колбаски, куриная копченая грудка."
 			}
 		];
-		const {pizza, drinks} = this.state;
+		const {isCartOpen, productList} = this.state;
 		console.log("pizza");
-		console.log(pizza);
+		console.log(productList!==undefined?productList.pizza:"productList is undefined still");
 		return (
 			<Router>
 				<StyledAppContainer>
-					<Header/>
+					<Header onCartIconClick = {this.cartOpeningHadler}/>
 					<DescribeFrontImage/>
 					<a name="menu"/>
 					<MenuBar/>
 					<a name="OpenPizza"/>
-					<ContentBlock labelImage={openPizzaLabelImage} items={pizza}/>
+					<ContentBlock labelImage={openPizzaLabelImage} items={productList!==undefined?productList.pizza:[]}/>
 					{
 						/* for(i=0;i<3;i++) */
 					}
@@ -106,13 +137,25 @@ export class App extends React.Component {
 						 */
 					}
 					<a name="Drinks" />
-					<ContentBlock labelImage={drinksLabelImage} items={drinks}/>
+					<ContentBlock labelImage={drinksLabelImage} items={productList!==undefined?productList.drinks:[]}/>
 
 					<a name="delivery"/>
 					<Delivery/>
 					<a name="about"/>
 					<AboutUs/>
 					<Footer/>
+					{
+						(()=>{
+							console.log("Footer function entered");
+							console.log(isCartOpen);
+							if(isCartOpen) {
+								return <StyledShadow>
+									<Cart />
+								</StyledShadow>;
+							}
+							return "";
+						})()
+					}
 				</StyledAppContainer>
 			</Router>
 		);
