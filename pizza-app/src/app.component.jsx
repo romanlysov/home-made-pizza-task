@@ -84,9 +84,10 @@ export class App extends React.Component {
 		});
 	}
 
-	cartClosingHadler = () => {
+	cartClosingHadler = (testString) => {
 		console.log("cartClosingHadler entered");
 		console.log(this.state);
+		console.log(testString);
 		this.setState((state)=>{
 			const {productList} = state;
 			const newState ={
