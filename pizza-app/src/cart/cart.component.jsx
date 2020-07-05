@@ -23,8 +23,7 @@ import {cartCloseIcon,
 } from "./images";
 import {UserDataForm} from "./userDataForm.component";
 import {ItemCard} from "../contentBlock/itemCard.component";
-
-
+import {meatPizzaImage} from "../contentBlock/images";
 
 
 // Cart is like this:
@@ -40,7 +39,7 @@ export const cartContentTemplate = {
 export function Cart(props){
 	/* constructor(props) {
 		super(props); */
-	const {onClose, userInfo, cart, productList, onIncrease, onDecrease}=props;
+	const {onClose, userInfo, cart, productList, onIncrease, onDecrease, onDeleteItem, onOrderSubmit}=props;
 	console.log("Cart entered");
 	console.log(cart);
 	console.log("productList");
@@ -87,7 +86,7 @@ export function Cart(props){
 					</StyledModifyQuantityButtonsBlock>
 				</StyledPriceAndButtonsContainer>
 			</StyledItemInfo>
-			<StyledItemDeleteButton>
+			<StyledItemDeleteButton onClick={()=>{onDeleteItem(itemInCart.id)}}>
 				<img src={cartCloseIcon} />
 			</StyledItemDeleteButton>
 		</StyledItemBlock>
@@ -97,7 +96,7 @@ export function Cart(props){
 			{cart!==undefined?cart.map(itemBlock):""}
 			<p>Итого {totalCost} руб.</p>
 		</StyledCartLeftBlock>
-		<UserDataForm onClose={onClose} userInfo = {userInfo} cart={cart}/>
+		<UserDataForm onClose={onClose} userInfo = {userInfo} cart={cart} onOrderSubmit={onOrderSubmit}/>
 	</StyledCart>;
 	/* } */
 };

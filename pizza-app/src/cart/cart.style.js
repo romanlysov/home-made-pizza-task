@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {cartCloseIcon} from "./images";
+import {meatPizzaImage} from "../contentBlock/images";
 
 export const StyledCart= styled.div`
 	width: 70%;
@@ -45,6 +46,10 @@ export const StyledTextInput = styled.input`
 	
 `;
 
+export const StyledSelectField = styled.select`
+	
+`;
+
 export const StyledSubmitButton = styled.button`
 	height: 20px;
 	width: 100px;
@@ -71,9 +76,13 @@ export const StyledItemBlock=styled.div`
 `;
 
 export const StyledItemIcon=styled.div`
+    flex: auto;
+    margin-left: auto;
+    margin-right: auto;
+    background: url(${meatPizzaImage}) center no-repeat;
+    background-size: 60% 60%;    
 	width: 20%;
 	height: 90%;
-	background: grey;
 `;
 
 export const StyledItemInfo=styled.div`

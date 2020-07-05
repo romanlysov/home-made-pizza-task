@@ -11,11 +11,11 @@ import {DescribeFrontImage} from "./describeFrontImage/describeFrontImage.compon
 import {ContentBlock} from "./contentBlock/contentBlock.component";
 import {openPizzaLabelImage, closedPizzaLabelImage, drinksLabelImage} from "./contentBlock/images";
 import {AboutUs} from "./aboutUs/aboutUs.component";
-import {getJson} from "./services";
+import {getJson, postJson} from "./services";
 import {Modal} from "./modal/modal.component";
 import {StyledShadow} from "./modal/modal.style";
 import {Cart} from "./cart/cart.component";
-import {addressInputID, nameInputID, phoneInputID} from "./cart/cartFormInputIds";
+import {addressInputID, nameInputID, needChangeFromID, paymentTypeID, phoneInputID} from "./cart/cartFormInputIds";
 import {Contacts} from "./contacts/contacts.component";
 
 export class App extends React.Component {
@@ -106,7 +106,9 @@ export class App extends React.Component {
 				userInfo: {
 					name: document.getElementById(nameInputID).value,
 					phone: document.getElementById(phoneInputID).value,
-					address: document.getElementById(addressInputID).value
+					address: document.getElementById(addressInputID).value,
+					paymentType: document.getElementById(paymentTypeID).value,
+					needChangeFrom: document.getElementById(needChangeFromID).value
 				}
 			};
 			// newState.isCartOpen = true;
@@ -215,6 +217,69 @@ export class App extends React.Component {
 		});
 	};
 
+	deleteItemFromCartHandler = (itemID) => {
+		console.log("decreaseQuantityInCartHandler entered");
+		console.log(this.state);
+		console.log(itemID);
+		this.setState((state)=>{
+			let {cart} = state;
+			const {isCartOpen, productList, userInfo} = state;
+			const newCart= cart.reduce((acc, itemAndQ)=>{
+				if(itemAndQ.id==itemID){
+					return acc;
+				}
+				acc.push(itemAndQ);
+				return acc;
+			}, []);
+			cart=newCart;
+			const newState ={
+				isCartOpen,
+				productList,
+				cart,
+				userInfo
+			};
+			// newState.isCartOpen = true;
+			return newState;
+		});
+	};
+
+	orderSubmitHandler = () => {
+		console.log("orderSubmitHandler Works!!!");
+		console.log(this.state);
+		const amountOfPizza=0;
+		const amountOfDrink=0;
+		const {productList, cart}=this.state;
+		const orderObject = {
+			products: cart.reduce((acc, itemAndQ)=>{
+				for(let i=0;i<itemAndQ.quantity;i+=1){
+					acc.push(itemAndQ.id);
+				}
+
+			}, []),
+			name: document.getElementById(nameInputID).value,
+			phoneNumber: document.getElementById(phoneInputID).value,
+			address: document.getElementById(addressInputID).value,
+			payMethod: document.getElementById(paymentTypeID).value,
+		}
+		console.log("orderObject");
+		console.log(orderObject);
+		const obj = postJson('http://localhost:8080/CreateOrderDto');
+		obj.then((data)=>{
+			console.log("Then method in orderSubmitHandler entered");
+			this.setState((state)=>{
+				const newState = {
+					// TODO: userInfo
+					productList,
+					isCartOpen: false,
+					cart: []
+				};
+				return newState;
+			});
+			console.log("Order sent. New state: ");
+			console.log(this.state);
+		});
+	}
+
 	render() {
 		console.log("App render entered");
 		const pps = [
@@ -283,7 +348,7 @@ export class App extends React.Component {
 							console.log(isCartOpen);
 							if(isCartOpen) {
 								return <StyledShadow>
-									<Cart onClose = {this.cartClosingHadler} userInfo = {userInfo} cart = {cart} productList={productList} onIncrease = {this.increaseQuantityInCartHandler} onDecrease={this.decreaseQuantityInCartHandler}/>
+									<Cart onClose = {this.cartClosingHadler} userInfo = {userInfo} cart = {cart} productList={productList} onIncrease = {this.increaseQuantityInCartHandler} onDecrease={this.decreaseQuantityInCartHandler} onDeleteItem={this.deleteItemFromCartHandler} onOrderSubmit={this.orderSubmitHandler}/>
 								</StyledShadow>;
 							}
 							return "";

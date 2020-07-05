@@ -1,14 +1,19 @@
 import React from "react";
-import {StyledCartRightBlock, StyledCloseButton, StyledSubmitButton, StyledTextInput} from "./cart.style";
+import {StyledCartRightBlock,
+	StyledCloseButton,
+	StyledSubmitButton,
+	StyledTextInput,
+	StyledSelectField
+} from "./cart.style";
 import {cartCloseIcon} from "./images";
-import {addressInputID, nameInputID, phoneInputID} from "./cartFormInputIds";
+import {addressInputID, nameInputID, needChangeFromID, paymentTypeID, phoneInputID} from "./cartFormInputIds";
 
 export function UserDataForm(props) {
 	/* constructor(props) {
 		console.log("UserDataForm constructor entered");
 		super(props); */
 	const testString = "I am going from far sub-child to far sub-parent";
-	const {onClose, userInfo, cart}=props;
+	const {onClose, userInfo, cart, onOrderSubmit}=props;
 	const name = (() => {
 		console.log("userInfo");
 		console.log(userInfo);
@@ -27,9 +32,19 @@ export function UserDataForm(props) {
 			return userInfo.address;
 		}
 		return ""})();
+	const paymentType = (() => {
+		if(userInfo!==undefined&&userInfo.paymentType!==undefined) {
+			return userInfo.paymentType;
+		}
+		return ""})();
+	const needChangeFrom = (() => {
+		if(userInfo!==undefined&&userInfo.needChangeFrom!==undefined) {
+			return userInfo.needChangeFrom;
+		}
+		return ""})();
 	return <>
 		<StyledCartRightBlock>
-			<form>
+			<form onSubmit={onOrderSubmit}>
 				<p>ФИО</p>
 				<StyledTextInput id={nameInputID} defaultValue={name} />
 				<p>Телефон</p>
@@ -37,10 +52,14 @@ export function UserDataForm(props) {
 				<p>Адрес</p>
 				<StyledTextInput id={addressInputID} defaultValue={address}/>
 				<p>Тип оплаты</p>
-				<StyledTextInput />
+				<StyledSelectField id={paymentTypeID} defaultValue={paymentType}>
+					<option value="CASH">Наличными</option>
+					<option value="CARD">Картой</option>
+				</StyledSelectField>
 				<p>Нужна сдача с</p>
-				<StyledTextInput />
-				<StyledSubmitButton>
+				<StyledTextInput id={needChangeFromID} defaultValue={needChangeFrom} />
+				{/* TODO: prevent from submit */}
+				<StyledSubmitButton type="submit" onClick={()=>{/* event.preventDefault(); */ onOrderSubmit();}}>
 					Оформить заказ
 				</StyledSubmitButton>
 			</form>
