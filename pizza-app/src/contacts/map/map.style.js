@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import {deliveryMap} from "../images";
+import {contactLocation} from "../images";
 
 export const StyledMap= styled.div`
 	width: 40%;
-	height: 75%;
-	background: url(${deliveryMap}) center no-repeat;
+	height: 80%;
+	background: url(${contactLocation}) center no-repeat;
 	background-size: 100%;
 	border: 3px solid #FBE8BF;
     border-radius: 28px;

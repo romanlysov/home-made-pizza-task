@@ -6,6 +6,11 @@ export const StyledCompanyName = styled.div`
     font-size: 2.5em;
      margin-top: auto;
     margin-bottom: auto;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 `;
 export const Name = styled.div`
     display: flex;

@@ -8,7 +8,7 @@ export const StyledDeliveryDescription = styled.div`
 export const StyledTextBlock = styled.div`
 	margin-left: 20%;
 	width: 500px;
-	height: 75%;
+	height: 80%;
 	border: 3px solid #FBE8BF;
     border-radius: 28px;
     background-color: #F9F0DC;
