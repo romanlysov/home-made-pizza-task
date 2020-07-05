@@ -24,6 +24,7 @@ export const ElementOfMenu = styled.div`
     padding: 6px 35px 5px 28px;
     transition: 0.25s linear;
     display: flex;
+    cursor: pointer;
     &:hover{
        color: #ecba04;
        text-decoration: underline;
@@ -35,4 +36,10 @@ export const StyledOfTime = styled.div`
     margin-right: auto;
     width:200px;
     padding-bottom: 20px;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    
 `;

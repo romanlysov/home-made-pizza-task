@@ -5,7 +5,7 @@ import {SiteBlockLabel} from "../siteBlockLabel/siteBlockLabel.component";
 
 export const AboutUs = () => {
 	return <StyledAboutUs>
-		<SiteBlockLabel background={aboutUsLabelImage}/>
+		<SiteBlockLabel> Немного о нас</SiteBlockLabel>
 		<StyledAboutUsInnerContainer>
 			<StyledAboutUsHandsImage />
 			<StyledAboutUsDescription>

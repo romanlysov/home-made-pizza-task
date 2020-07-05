@@ -15,19 +15,21 @@ export const StyledAboutUsInnerContainer = styled.div`
 	display:flex;
 	flex-direction: row;
 	justify-content: space-between;
-	
+	margin-top: 5%;
 	align-items: center;
 	width: 100%;
 `;
 
 export const StyledAboutUsHandsImage = styled.div`
-	height: 404px;
-	width: 25%; 
+	height: 410px;
+	width: 276px; 
 	display: block;
     /*margin-left: auto;*/
     /*margin-right: auto;*/
 	background: url(${aboutUsHandsImage}) no-repeat;
     background-size: 100%;
+    border: 3px solid #FBE8BF;
+    border-radius: 28px;
 `;
 
 export const StyledAboutUsDescription = styled.div`

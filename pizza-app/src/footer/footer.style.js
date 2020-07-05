@@ -6,7 +6,7 @@ export const StyledFooter = styled.div`
     justify-content: flex-start;
     align-items:center;
     background: #572000;
-    height: 110px;
+    height: 15%;
     
     color: rgb(97, 21, 91);
     font: normal 130% 'trebuchet ms', sans-serif;
@@ -38,6 +38,7 @@ export const StyledSocialNetsBlock = styled.div`
     justify-content: space-around;
     width: 40%;
     align-items:center;
+ 
 `;
 export const StyledSupportContactsBlock = styled.div`
 	display: flex;
