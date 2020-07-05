@@ -18,6 +18,7 @@ import {StyledShadow} from "./modal/modal.style";
 import {Cart} from "./cart/cart.component";
 import {addressInputID, nameInputID, needChangeFromID, paymentTypeID, phoneInputID} from "./cart/cartFormInputIds";
 import {Contacts} from "./contacts/contacts.component";
+import {MessageWindow} from "./messageWindow/messageWindow.component";
 
 export class App extends React.Component {
 	constructor(props) {
@@ -116,6 +117,27 @@ export class App extends React.Component {
 			return newState;
 		});
 	}
+
+	messageWindowCloseHandler = (windowType) => {
+		console.log("messageWindowCloseHandler entered. Old state:");
+		console.log(this.state);
+		console.log("windowType");
+		console.log(windowType);
+		// const isThanksWindowOpened = !(windowType =="thanks");
+		// const isErrorSubmitWindowOpened = !(windowType =="error");
+		const {cart, productList, userInfo} = this.state;
+		const newState={
+			cart,
+			productList,
+			userInfo,
+			isThanksWindowOpened: false,
+			isErrorSubmitWindowOpened: false
+		};
+		this.state=newState;
+		console.log("New state:");
+		console.log(this.state);
+		this.render();
+	};
 
 	addToCartHandler = (itemID) => {
 		console.log("addToCartHandler entered");
@@ -310,7 +332,8 @@ export class App extends React.Component {
 						// TODO: userInfo
 						productList,
 						isCartOpen: false,
-						cart: []
+						cart: [],
+						isThanksWindowOpened: true
 					};
 					return newState;
 				});
@@ -357,7 +380,7 @@ export class App extends React.Component {
 				ingredients: "Неаполитанский соус, сервелат, колбаски, куриная копченая грудка."
 			}
 		];
-		const {isCartOpen, productList, userInfo, cart} = this.state;
+		const {isCartOpen, isThanksWindowOpened, productList, userInfo, cart} = this.state;
 		console.log("pizza");
 		console.log(productList!==undefined?productList.pizza:"productList is undefined still");
 		return (
@@ -394,6 +417,18 @@ export class App extends React.Component {
 							if(isCartOpen) {
 								return <StyledShadow>
 									<Cart onClose = {this.cartClosingHadler} userInfo = {userInfo} cart = {cart} productList={productList} onIncrease = {this.increaseQuantityInCartHandler} onDecrease={this.decreaseQuantityInCartHandler} onDeleteItem={this.deleteItemFromCartHandler} onOrderSubmit={this.orderSubmitHandler}/>
+								</StyledShadow>;
+							}
+							return "";
+						})()
+					}
+					{
+						(()=>{
+							console.log("Thanks modal window function entered");
+							console.log(isCartOpen);
+							if(isThanksWindowOpened) {
+								return <StyledShadow>
+									<MessageWindow message = "Спасибо за оформление заказа! Ожидайте звонка оператора" type="thanks" onClose ={this.messageWindowCloseHandler}/>
 								</StyledShadow>;
 							}
 							return "";
