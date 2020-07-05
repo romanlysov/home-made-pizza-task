@@ -47,3 +47,10 @@ export const StyledPrice = styled.div`
 `;
 export const StyledBottom = styled.div`
 `;
+
+export const StyledBuyButton=styled.button`
+	background: red;
+	height: 28px;
+	width: 100px;
+	border-style: none;
+`

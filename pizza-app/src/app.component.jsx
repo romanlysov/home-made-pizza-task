@@ -15,6 +15,7 @@ import {getJson} from "./services";
 import {Modal} from "./modal/modal.component";
 import {StyledShadow} from "./modal/modal.style";
 import {Cart} from "./cart/cart.component";
+import {addressInputID, nameInputID, phoneInputID} from "./cart/cartFormInputIds";
 
 export class App extends React.Component {
 	constructor(props) {
@@ -24,7 +25,8 @@ export class App extends React.Component {
 				openPizza: [],
 				closedPizza: []
 			}, */
-			isCartOpen: false
+			isCartOpen: false,
+			cart: [{id: "5fa15f7f-799b-4423-9d89-5fa1192db915", quantity: 4}]
 		};
 		// this.state = {openPizza:[], closedPizza:[]};
 	}
@@ -74,10 +76,12 @@ export class App extends React.Component {
 		console.log("cartOpeningHadler entered");
 		console.log(this.state);
 		this.setState((state)=>{
-			const {productList} = state;
+			const {productList, userInfo, cart} = state;
 			const newState ={
 				isCartOpen: true,
-				productList
+				cart,
+				productList,
+				userInfo
 			};
 			// newState.isCartOpen = true;
 			return newState;
@@ -88,11 +92,20 @@ export class App extends React.Component {
 		console.log("cartClosingHadler entered");
 		console.log(this.state);
 		console.log(testString);
+		const name = document.getElementById(nameInputID).value;
+		console.log("Name in form: ");
+		console.log(name);
 		this.setState((state)=>{
-			const {productList} = state;
+			const {productList, cart} = state;
 			const newState ={
 				isCartOpen: false,
-				productList
+				productList,
+				cart,
+				userInfo: {
+					name: document.getElementById(nameInputID).value,
+					phone: document.getElementById(phoneInputID).value,
+					address: document.getElementById(addressInputID).value
+				}
 			};
 			// newState.isCartOpen = true;
 			return newState;
@@ -131,7 +144,7 @@ export class App extends React.Component {
 				ingredients: "Неаполитанский соус, сервелат, колбаски, куриная копченая грудка."
 			}
 		];
-		const {isCartOpen, productList} = this.state;
+		const {isCartOpen, productList, userInfo, cart} = this.state;
 		console.log("pizza");
 		console.log(productList!==undefined?productList.pizza:"productList is undefined still");
 		return (
@@ -142,7 +155,7 @@ export class App extends React.Component {
 					<a name="menu"/>
 					<MenuBar/>
 					<a name="OpenPizza"/>
-					<ContentBlock labelImage={openPizzaLabelImage} items={productList!==undefined?productList.pizza:[]}/>
+					<ContentBlock labelImage={openPizzaLabelImage} items={productList!==undefined?productList.pizza:[]} cart={cart!==undefined?cart:[]} />
 					{
 						/* for(i=0;i<3;i++) */
 					}
@@ -152,7 +165,7 @@ export class App extends React.Component {
 						 */
 					}
 					<a name="Drinks" />
-					<ContentBlock labelImage={drinksLabelImage} items={productList!==undefined?productList.drinks:[]}/>
+					<ContentBlock labelImage={drinksLabelImage} items={productList!==undefined?productList.drinks:[]} cart={cart!==undefined?cart:[]} />
 
 					<a name="delivery"/>
 					<Delivery/>
@@ -165,7 +178,7 @@ export class App extends React.Component {
 							console.log(isCartOpen);
 							if(isCartOpen) {
 								return <StyledShadow>
-									<Cart onClose ={this.cartClosingHadler}/>
+									<Cart onClose = {this.cartClosingHadler} userInfo = {userInfo}/>
 								</StyledShadow>;
 							}
 							return "";

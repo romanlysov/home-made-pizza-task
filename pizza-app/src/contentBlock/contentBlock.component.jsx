@@ -6,9 +6,12 @@ import {FourItemsBlock} from "./fourItemsBlock.component";
 import {openPizzaLabelImage} from "./images";
 
 export function ContentBlock(props) {
-	const {labelImage, items}=props;
+	const {labelImage, items, cart}=props;
+	console.log("ContentBlock's cart");
+	console.log(cart);
+	console.log([{id: "5fa15f7f-799b-4423-9d89-5fa1192db915", quantity: 4}]);
 	return <StyledContentBlock>
 		<SiteBlockLabel background={labelImage}/>
-		<FourItemsBlock items={items}/>
+		<FourItemsBlock items={items} cart={cart} />
 	</StyledContentBlock>;
 }

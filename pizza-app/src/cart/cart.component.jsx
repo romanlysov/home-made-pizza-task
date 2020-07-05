@@ -25,13 +25,13 @@ export const cartContentTemplate = {
 export function Cart(props){
 	/* constructor(props) {
 		super(props); */
-	const {onClose}=props;
+	const {onClose, userInfo, cart}=props;
 	return <StyledCart>
 		<StyledCartLeftBlock>
 			<div />
 			<p>Итого</p>
 		</StyledCartLeftBlock>
-		<UserDataForm onClose={onClose} />
+		<UserDataForm onClose={onClose} userInfo = {userInfo} cart={cart}/>
 	</StyledCart>;
 	/* } */
 };

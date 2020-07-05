@@ -1,10 +1,18 @@
 import React from "react";
-import {StyledItemCard, StyledPizza, StyledNameOfPizza, StyledNutritionalValueOfPizza, StyledStructureOfPizza, StyledSubMenuOfPizza, StyledPrice} from "./itemCard.style";
+import {StyledItemCard,
+	StyledPizza,
+	StyledNameOfPizza,
+	StyledNutritionalValueOfPizza,
+	StyledStructureOfPizza,
+	StyledSubMenuOfPizza,
+	StyledPrice,
+	StyledBuyButton
+} from "./itemCard.style";
 import {meatPizzaImage} from "./images";
 
 export function ItemCard(props){
 	console.log(props);
-	const {item}=props;
+	const {item, cart}=props;
 	const ingredientsMapper={
 		CHICKEN: "Курица",
 		HAM: "Ветчина",
@@ -30,6 +38,19 @@ export function ItemCard(props){
 		console.log(Ingredients);
 		Ingredients = Ingredients[0] + Ingredients.slice(1, Ingredients.length-2).toLowerCase();
 	}
+	// TODO: check for errors
+	const buyButtonValue = cart!==undefined?( () => {
+		const isInCart = cart.reduce((acc, cartItem)=>{
+			if(cartItem.id == item.id){
+				return cartItem.quantity;
+			}
+			return acc;
+		}, false);
+		if(isInCart){
+			return `В корзине (${isInCart})`;
+		}
+		return "Купить";
+	} )():"Купить";
 	return <StyledItemCard>
 		<StyledPizza />
 		<StyledSubMenuOfPizza>
@@ -42,6 +63,9 @@ export function ItemCard(props){
 						item.ccal!==undefined?(<p>{item.ccal} ккал./100 гр.</p>):""
 					}
 					<StyledPrice>{item.price} руб.</StyledPrice>
+					<StyledBuyButton>
+						<p>{buyButtonValue}</p>
+					</StyledBuyButton>
 				</div>
 
 			</StyledNutritionalValueOfPizza>
