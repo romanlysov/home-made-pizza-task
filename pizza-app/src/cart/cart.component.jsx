@@ -5,10 +5,25 @@ import {StyledCart,
 	StyledTextInput,
 	StyledSubmitButton,
 	StyledForm,
-	StyledCloseButton
+	StyledCloseButton,
+	StyledItemBlock,
+	StyledItemIcon,
+	StyledItemInfo,
+	StyledItemDeleteButton,
+	StyledLabel,
+	StyledPriceAndButtonsContainer,
+	StyledPrice,
+	StyledModifyQuantityButtonsBlock,
+	StyledModifyButton,
+	StyledQuantityLabel
 } from "./cart.style";
-import {cartCloseIcon} from "./images";
+import {cartCloseIcon,
+	minusButton,
+	plusButton
+} from "./images";
 import {UserDataForm} from "./userDataForm.component";
+import {ItemCard} from "../contentBlock/itemCard.component";
+
 
 
 
@@ -25,11 +40,62 @@ export const cartContentTemplate = {
 export function Cart(props){
 	/* constructor(props) {
 		super(props); */
-	const {onClose, userInfo, cart}=props;
+	const {onClose, userInfo, cart, productList, onIncrease, onDecrease}=props;
+	console.log("Cart entered");
+	console.log(cart);
+	console.log("productList");
+	console.log(productList);
+	let totalCost = 0;
+	function itemBlock(itemInCart){
+		let productLabelAndPrice = {label: "Unknown", price: "Unknown"};
+		productLabelAndPrice=productList!==undefined?productList.pizza.reduce((acc, product)=>{
+			if(product.id==itemInCart.id){
+				totalCost+=product.price*itemInCart.quantity;
+				return {label: product.productName, price: product.price};
+			}
+			return acc;
+		}, {label: "Unknown", price: "Unknown"}) : {label: "Unknown", price: "Unknown"};
+		if(productLabelAndPrice.label=="Unknown"){
+			productLabelAndPrice=productList!==undefined?productList.drinks.reduce((acc, product)=>{
+				if(product.id==itemInCart.id){
+					totalCost+=product.price*itemInCart.quantity;
+					return {label: product.productName, price: product.price};
+				}
+				return acc;
+			}, {label: "Unknown", price: "Unknown"}) : {label: "Unknown", price: "Unknown"};
+		}
+		return <StyledItemBlock>
+			<StyledItemIcon />
+			<StyledItemInfo>
+				<StyledLabel>
+					<p>{productLabelAndPrice.label}</p>
+				</StyledLabel>
+				<StyledPriceAndButtonsContainer>
+					<StyledPrice>
+						<p>{productLabelAndPrice.price} руб.</p>
+					</StyledPrice>
+					<StyledModifyQuantityButtonsBlock>
+						<StyledModifyButton onClick={()=>{onDecrease(itemInCart.id)}}>
+							<img src={minusButton} />
+						</StyledModifyButton>
+						<StyledQuantityLabel>
+							<p>{itemInCart.quantity}</p>
+						</StyledQuantityLabel>
+						<StyledModifyButton onClick={()=>{onIncrease(itemInCart.id)}} >
+							<img src={plusButton} />
+						</StyledModifyButton>
+					</StyledModifyQuantityButtonsBlock>
+				</StyledPriceAndButtonsContainer>
+			</StyledItemInfo>
+			<StyledItemDeleteButton>
+				<img src={cartCloseIcon} />
+			</StyledItemDeleteButton>
+		</StyledItemBlock>
+	};
 	return <StyledCart>
 		<StyledCartLeftBlock>
-			<div />
-			<p>Итого</p>
+			{cart!==undefined?cart.map(itemBlock):""}
+			<p>Итого {totalCost} руб.</p>
 		</StyledCartLeftBlock>
 		<UserDataForm onClose={onClose} userInfo = {userInfo} cart={cart}/>
 	</StyledCart>;

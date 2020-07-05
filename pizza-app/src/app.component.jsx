@@ -150,6 +150,71 @@ export class App extends React.Component {
 		});
 	};
 
+	increaseQuantityInCartHandler = (itemID) => {
+		console.log("increaseQuantityInCartHandler entered");
+		console.log(this.state);
+		console.log(itemID);
+		this.setState((state)=>{
+			let {cart} = state;
+			const {isCartOpen, productList, userInfo} = state
+			let cartChanged = false;
+			const newCart= cart.map((itemAndQ)=>{
+				if(itemAndQ.id==itemID){
+					cartChanged = true;
+					return {
+						id: itemAndQ.id,
+						quantity: itemAndQ.quantity + 1
+					};
+				}
+				return itemAndQ;
+			});
+			cart=newCart;
+			const newState ={
+				isCartOpen,
+				productList,
+				cart,
+				userInfo
+			};
+			// newState.isCartOpen = true;
+			return newState;
+		});
+	};
+
+	decreaseQuantityInCartHandler = (itemID) => {
+		console.log("decreaseQuantityInCartHandler entered");
+		console.log(this.state);
+		console.log(itemID);
+		this.setState((state)=>{
+			let {cart} = state;
+			const {isCartOpen, productList, userInfo} = state
+			let cartChanged = false;
+			const newCart= cart.reduce((acc, itemAndQ)=>{
+				if(itemAndQ.id==itemID){
+					cartChanged = true;
+					const newQuantity = (itemAndQ.quantity==0?itemAndQ.quantity:itemAndQ.quantity-1);
+					if(newQuantity!=0){
+						acc.push({
+							id: itemAndQ.id,
+							quantity: newQuantity
+						});
+					}
+					return acc;
+				}
+				acc.push(itemAndQ);
+				return acc;
+			}, []);
+			cart=newCart;
+			const newState ={
+				isCartOpen,
+				productList,
+				cart,
+				userInfo
+			};
+			// newState.isCartOpen = true;
+			return newState;
+		});
+	};
+
 	render() {
 		console.log("App render entered");
 		const pps = [
@@ -218,7 +283,7 @@ export class App extends React.Component {
 							console.log(isCartOpen);
 							if(isCartOpen) {
 								return <StyledShadow>
-									<Cart onClose = {this.cartClosingHadler} userInfo = {userInfo}/>
+									<Cart onClose = {this.cartClosingHadler} userInfo = {userInfo} cart = {cart} productList={productList} onIncrease = {this.increaseQuantityInCartHandler} onDecrease={this.decreaseQuantityInCartHandler}/>
 								</StyledShadow>;
 							}
 							return "";
