@@ -8,5 +8,6 @@ export const StyledBasketIcon = styled.div`
 	background-size: 100% 100%;
 	position:absolute;
 	right: 2%;
+	cursor:pointer;
 `;
 

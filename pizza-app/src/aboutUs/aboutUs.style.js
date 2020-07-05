@@ -7,14 +7,14 @@ export const StyledAboutUs = styled.div`
 	justify-content: space-between;
 	margin-left: 5%;
 	width: 80%;
-	margin-bottom: 50px;
+	margin-top: 100px;
 `;
 
 export const StyledAboutUsInnerContainer = styled.div`
 	display:flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin-top: 5%;
+	margin-top: 2%;
 	align-items: center;
 	width: 100%;
 `;
