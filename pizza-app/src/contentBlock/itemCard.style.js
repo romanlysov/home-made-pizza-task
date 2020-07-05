@@ -3,13 +3,13 @@ import {meatPizzaImage} from "./images";
 
 export const StyledItemCard = styled.div`
     border-radius: 28px;
+    border: 3px solid #FBE8BF;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	margin-left: 3%;
 	margin-right: 3%;
-	width: 30%;
-	height: auto;
+	width: 300px;
+	height: 400px;
 	background: #F9F0DC;
 `;
 export const StyledPizza = styled.div`
@@ -19,7 +19,7 @@ export const StyledPizza = styled.div`
     margin-left: auto;
     margin-right: auto;
     background: url(${meatPizzaImage}) center no-repeat;
-    background-size: 90% 90%;
+    background-size: 100%;
 `;
 export const StyledSubMenuOfPizza = styled.div`
     margin-left: 5%;
@@ -44,13 +44,28 @@ export const StyledNutritionalValueOfPizza = styled.div`
 export const StyledPrice = styled.div`
     font-weight: bold;
     font-size: 130%;
-`;
-export const StyledBottom = styled.div`
+    width:70px;
+    margin-left:20px;
 `;
 
 export const StyledBuyButton=styled.button`
-	background: red;
+	background: #CCBCBC;
 	height: 28px;
 	width: 100px;
-	border-style: none;
-`
+	border: 2px solid #BCACAC;
+	border-radius: 12px;
+	cursor:pointer;
+	margin-left: 60px;
+`;
+export const StyledButtonText=styled.button`
+	font: normal 100% 'trebuchet ms', sans-serif;
+	font-weight: bold;
+	background-color: #CCBCBC;
+	margin: auto;
+	border: none;
+`;
+export const StyledPriceLine=styled.button`
+    border: none;
+    background-color: #F9F0DC;
+    display:flex;
+`;

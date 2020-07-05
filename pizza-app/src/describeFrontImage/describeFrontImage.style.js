@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {frontTopImage} from "./images";
 
 export const StyledDescribeFrontImage = styled.div`
-	height: 450px;
+	height: 400px;
 	width: 90%; 
 	display: block;
     margin-left: auto;

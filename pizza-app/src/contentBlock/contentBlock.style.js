@@ -5,5 +5,7 @@ export const StyledContentBlock = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	margin-right: 5%;
-	width: 100%;
+	margin-left: 5%;
+	margin-top: 7%;
+	width: 90%;
 `

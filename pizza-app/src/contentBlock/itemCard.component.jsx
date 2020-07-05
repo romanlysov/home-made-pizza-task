@@ -6,7 +6,7 @@ import {StyledItemCard,
 	StyledStructureOfPizza,
 	StyledSubMenuOfPizza,
 	StyledPrice,
-	StyledBuyButton
+	StyledBuyButton, StyledPriceLine, StyledButtonText
 } from "./itemCard.style";
 import {meatPizzaImage} from "./images";
 
@@ -63,10 +63,12 @@ export function ItemCard(props){
 					{
 						item.ccal!==undefined?(<p>{item.ccal} ккал./100 гр.</p>):""
 					}
-					<StyledPrice>{item.price} руб.</StyledPrice>
-					<StyledBuyButton value={buttonID} onClick={()=>{onAddToCart(item.id);}}>
-						<p>{buyButtonValue}</p>
-					</StyledBuyButton>
+					<StyledPriceLine>
+						<StyledPrice>{item.price} руб.</StyledPrice>
+						<StyledBuyButton value={buttonID} onClick={()=>{onAddToCart(item.id);}}>
+							<StyledButtonText>{buyButtonValue}</StyledButtonText>
+						</StyledBuyButton>
+					</StyledPriceLine>
 				</div>
 
 			</StyledNutritionalValueOfPizza>
