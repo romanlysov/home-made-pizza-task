@@ -6,7 +6,6 @@ export const StyledAboutUs = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	margin-left: 5%;
-	/*margin-right: 5%;*/
 	width: 80%;
 	margin-bottom: 50px;
 `;

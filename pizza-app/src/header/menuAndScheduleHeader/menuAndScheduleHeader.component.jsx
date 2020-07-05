@@ -7,11 +7,11 @@ export const MenuAndScheduleHeader = () => {
 		<StyledMenuAndScheduleHeader>
 			<StyledOfTime>Время работы: 09:00 - 21:00</StyledOfTime>
 			<Menu>
-				<ElementOfMenu href="#">Главная</ElementOfMenu>
-				<ElementOfMenu href="#menu">Меню</ElementOfMenu>
-				<ElementOfMenu href="#">О нас</ElementOfMenu>
-				<ElementOfMenu href="#delivery">Доставка</ElementOfMenu>
-				<ElementOfMenu href="#">Контакты</ElementOfMenu>
+				<a href="#"><ElementOfMenu >Главная</ElementOfMenu></a>
+				<a href="#menu"><ElementOfMenu>Меню</ElementOfMenu></a>
+				<a href="#about"><ElementOfMenu>О нас</ElementOfMenu></a>
+				<a href="#delivery"><ElementOfMenu>Доставка</ElementOfMenu></a>
+				<a href="#contacts"><ElementOfMenu>Контакты</ElementOfMenu></a>
 			</Menu>
 		</StyledMenuAndScheduleHeader>
 	)

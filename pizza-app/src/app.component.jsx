@@ -15,6 +15,7 @@ import {getJson} from "./services";
 import {Modal} from "./modal/modal.component";
 import {StyledShadow} from "./modal/modal.style";
 import {Cart} from "./cart/cart.component";
+import {Contacts} from "./contacts/contacts.component";
 
 export class App extends React.Component {
 	constructor(props) {
@@ -158,6 +159,8 @@ export class App extends React.Component {
 					<Delivery/>
 					<a name="about"/>
 					<AboutUs/>
+					<a name="contacts"/>
+					<Contacts/>
 					<Footer/>
 					{
 						(()=>{
