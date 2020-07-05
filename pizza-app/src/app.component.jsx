@@ -26,7 +26,8 @@ export class App extends React.Component {
 				closedPizza: []
 			}, */
 			isCartOpen: false,
-			cart: [{id: "5fa15f7f-799b-4423-9d89-5fa1192db915", quantity: 4}]
+			// cart: [{id: "5fa15f7f-799b-4423-9d89-5fa1192db915", quantity: 4}]
+			cart: []
 		};
 		// this.state = {openPizza:[], closedPizza:[]};
 	}
@@ -112,6 +113,42 @@ export class App extends React.Component {
 		});
 	}
 
+	addToCartHandler = (itemID) => {
+		console.log("addToCartHandler entered");
+		console.log(this.state);
+		console.log(itemID);
+		this.setState((state)=>{
+			let {cart} = state;
+			const {isCartOpen, productList, userInfo} = state
+			let cartChanged = false;
+			const newCart= cart.map((itemAndQ)=>{
+				if(itemAndQ.id==itemID){
+					cartChanged = true;
+					return {
+						id: itemAndQ.id,
+						quantity: itemAndQ.quantity + 1
+					};
+				}
+				return itemAndQ;
+			});
+			cart=newCart;
+			if(!cartChanged){
+				newCart.push({
+					id: itemID,
+					quantity: 1
+				});
+			}
+			const newState ={
+				isCartOpen: false,
+				productList,
+				cart,
+				userInfo
+			};
+			// newState.isCartOpen = true;
+			return newState;
+		});
+	};
+
 	render() {
 		console.log("App render entered");
 		const pps = [
@@ -155,7 +192,7 @@ export class App extends React.Component {
 					<a name="menu"/>
 					<MenuBar/>
 					<a name="OpenPizza"/>
-					<ContentBlock labelImage={openPizzaLabelImage} items={productList!==undefined?productList.pizza:[]} cart={cart!==undefined?cart:[]} />
+					<ContentBlock labelImage={openPizzaLabelImage} items={productList!==undefined?productList.pizza:[]} cart={cart!==undefined?cart:[]} onAddToCart={this.addToCartHandler}/>
 					{
 						/* for(i=0;i<3;i++) */
 					}
@@ -165,7 +202,7 @@ export class App extends React.Component {
 						 */
 					}
 					<a name="Drinks" />
-					<ContentBlock labelImage={drinksLabelImage} items={productList!==undefined?productList.drinks:[]} cart={cart!==undefined?cart:[]} />
+					<ContentBlock labelImage={drinksLabelImage} items={productList!==undefined?productList.drinks:[]} cart={cart!==undefined?cart:[]} onAddToCart={this.addToCartHandler}/>
 
 					<a name="delivery"/>
 					<Delivery/>

@@ -12,7 +12,7 @@ import {meatPizzaImage} from "./images";
 
 export function ItemCard(props){
 	console.log(props);
-	const {item, cart}=props;
+	const {item, cart, onAddToCart}=props;
 	const ingredientsMapper={
 		CHICKEN: "Курица",
 		HAM: "Ветчина",
@@ -51,6 +51,7 @@ export function ItemCard(props){
 		}
 		return "Купить";
 	} )():"Купить";
+	const buttonID = `${"button_add"} ${item.id}`;
 	return <StyledItemCard>
 		<StyledPizza />
 		<StyledSubMenuOfPizza>
@@ -63,7 +64,7 @@ export function ItemCard(props){
 						item.ccal!==undefined?(<p>{item.ccal} ккал./100 гр.</p>):""
 					}
 					<StyledPrice>{item.price} руб.</StyledPrice>
-					<StyledBuyButton>
+					<StyledBuyButton value={buttonID} onClick={()=>{onAddToCart(item.id);}}>
 						<p>{buyButtonValue}</p>
 					</StyledBuyButton>
 				</div>

@@ -4,7 +4,7 @@ import {ItemCard} from "./itemCard.component";
 
 export function FourItemsBlock(props) {
 	// console.log(props);
-	const {items, cart}=props;
+	const {items, cart, onAddToCart}=props;
 	// const {child0, child1, child2, child3} = items;
 	// console.log(child0);
 	// console.log(child1);
@@ -12,7 +12,7 @@ export function FourItemsBlock(props) {
 	// console.log(props);
 	if(items!==undefined){
 		return <StyledFourItemsBlock>
-			{items.map(item => <ItemCard item = {item} cart={cart} />)}
+			{items.map(item => <ItemCard item = {item} cart={cart} onAddToCart={onAddToCart}/>)}
 		</StyledFourItemsBlock>;
 	}
 	return <StyledFourItemsBlock />;
