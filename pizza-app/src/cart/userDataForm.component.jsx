@@ -44,7 +44,7 @@ export function UserDataForm(props) {
 		return ""})();
 	return <>
 		<StyledCartRightBlock>
-			<form onSubmit={onOrderSubmit}>
+			<form>
 				<p>ФИО</p>
 				<StyledTextInput id={nameInputID} defaultValue={name} />
 				<p>Телефон</p>
@@ -59,7 +59,7 @@ export function UserDataForm(props) {
 				<p>Нужна сдача с</p>
 				<StyledTextInput id={needChangeFromID} defaultValue={needChangeFrom} />
 				{/* TODO: prevent from submit */}
-				<StyledSubmitButton type="submit" onClick={()=>{/* event.preventDefault(); */ onOrderSubmit();}}>
+				<StyledSubmitButton type="button" onClick={onOrderSubmit}>
 					Оформить заказ
 				</StyledSubmitButton>
 			</form>

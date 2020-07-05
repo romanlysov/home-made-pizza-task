@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { BrowserRouter as Router } from 'react-router-dom';
 import {Logo} from './header/logo/logo.component';
 import { StyledAppContainer} from './app.styles';
@@ -244,40 +245,84 @@ export class App extends React.Component {
 	};
 
 	orderSubmitHandler = () => {
+		// event.preventDefault();
 		console.log("orderSubmitHandler Works!!!");
 		console.log(this.state);
 		const amountOfPizza=0;
 		const amountOfDrink=0;
 		const {productList, cart}=this.state;
-		const orderObject = {
-			products: cart.reduce((acc, itemAndQ)=>{
-				for(let i=0;i<itemAndQ.quantity;i+=1){
-					acc.push(itemAndQ.id);
+		/* const orderProductList = cart.reduce((accumulator, itemAndQ)=>{
+			console.log("Entered cart.reduce in order send method");
+			accumulator.push(itemAndQ.id);
+			for(let i=0;i<itemAndQ.quantity;i+=1){
+				accumulator.push(itemAndQ.id);
+			};
+		}, []); */
+		const products=[];
+		for(let i=0;i<cart.length;i+=1){
+			for(let k=0;k<productList.pizza.length;k+=1){
+				if(cart[i].id==productList.pizza[k].id){
+					for(let j=0;j<cart[i].quantity;j+=1){
+						console.log("found some coincidence");
+						products.push({
+							...productList.pizza[k],
+							type: "pizza"
+						});
+					}
 				}
-
-			}, []),
+			}
+		}
+		for(let i=0;i<cart.length;i+=1){
+			for(let k=0;k<productList.drinks.length;k+=1){
+				if(cart[i].id==productList.drinks[k].id){
+					for(let j=0;j<cart[i].quantity;j+=1){
+						console.log("found some coincidence");
+						products.push({
+							...productList.drinks[k],
+							type: "drink"
+						});
+					}
+				}
+			}
+		}
+		const orderObject = {
+			id: uuidv4(),
+			products,
 			name: document.getElementById(nameInputID).value,
 			phoneNumber: document.getElementById(phoneInputID).value,
 			address: document.getElementById(addressInputID).value,
 			payMethod: document.getElementById(paymentTypeID).value,
+			// amountOfDrink: 0,
+			// amountOfPizza: 1
 		}
 		console.log("orderObject");
 		console.log(orderObject);
-		const obj = postJson('http://localhost:8080/CreateOrderDto');
-		obj.then((data)=>{
-			console.log("Then method in orderSubmitHandler entered");
-			this.setState((state)=>{
-				const newState = {
-					// TODO: userInfo
-					productList,
-					isCartOpen: false,
-					cart: []
-				};
-				return newState;
+		console.log(cart);
+		const obj = postJson('http://localhost:8080/CreateOrder', orderObject);
+		console.log("promise post object");
+		console.log(obj);
+		obj
+			.then((data)=>{
+				console.log("Then method in orderSubmitHandler entered");
+				console.log(data);
+				this.setState((state)=>{
+					const newState = {
+						// TODO: userInfo
+						productList,
+						isCartOpen: false,
+						cart: []
+					};
+					return newState;
+				});
+				console.log("Order sent. New state: ");
+				console.log(this.state);
+			})
+			.catch((e)=>{
+				console.log("Entered exception block");
+				console.log(e);
 			});
-			console.log("Order sent. New state: ");
-			console.log(this.state);
-		});
+
+
 	}
 
 	render() {
