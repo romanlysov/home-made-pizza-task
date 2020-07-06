@@ -85,7 +85,8 @@ export const StyledItemIcon=styled.div`
     flex: auto;
     margin-left: auto;
     margin-right: auto;
-    background: url(${meatPizzaImage}) center no-repeat;
+    /* background: url(${meatPizzaImage}) center no-repeat; */
+    background: url(${props=>props.background}) center no-repeat;
     background-size: 100px 100px;    
 	width: 20%;
 	height: 90%;

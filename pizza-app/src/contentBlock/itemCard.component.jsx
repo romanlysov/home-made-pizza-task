@@ -9,6 +9,7 @@ import {StyledItemCard,
 	StyledBuyButton, StyledPriceLine, StyledButtonText
 } from "./itemCard.style";
 import {meatPizzaImage} from "./images";
+import {imageToItemMapper} from "../imageToItemMapper/mapper";
 
 export function ItemCard(props){
 	console.log(props);
@@ -52,8 +53,9 @@ export function ItemCard(props){
 		return "Купить";
 	} )():"Купить";
 	const buttonID = `${"button_add"} ${item.id}`;
+
 	return <StyledItemCard>
-		<StyledPizza />
+		<StyledPizza background={imageToItemMapper(item.productName)}/>
 		<StyledSubMenuOfPizza>
 			<StyledNameOfPizza>{item.productName}</StyledNameOfPizza>
 			<StyledStructureOfPizza>{Ingredients}</StyledStructureOfPizza>

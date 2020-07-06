@@ -24,6 +24,7 @@ import {cartCloseIcon,
 import {UserDataForm} from "./userDataForm.component";
 import {ItemCard} from "../contentBlock/itemCard.component";
 import {meatPizzaImage} from "../contentBlock/images";
+import {imageToItemMapper} from "../imageToItemMapper/mapper";
 
 
 // Cart is like this:
@@ -64,7 +65,7 @@ export function Cart(props){
 			}, {label: "Unknown", price: "Unknown"}) : {label: "Unknown", price: "Unknown"};
 		}
 		return <StyledItemBlock key={itemInCart.id}>
-			<StyledItemIcon />
+			<StyledItemIcon background={imageToItemMapper(productLabelAndPrice.label)}/>
 			<StyledItemInfo>
 				<StyledLabel>
 					<p>{productLabelAndPrice.label}</p>
