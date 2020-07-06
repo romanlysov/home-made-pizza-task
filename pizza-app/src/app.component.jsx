@@ -85,7 +85,8 @@ export class App extends React.Component {
 				isCartOpen: true,
 				cart,
 				productList,
-				userInfo
+				userInfo,
+				formErrors: {}
 			};
 			// newState.isCartOpen = true;
 			return newState;
@@ -274,12 +275,37 @@ export class App extends React.Component {
 		console.log("orderSubmitHandler Works!!!");
 		console.log(this.state);
 
+		this.setState((state)=>{
+			const newState={
+				...state
+			};
+			newState.formErrors = { };
+			return newState;
+		});
 
 		if(document.getElementById(nameInputID).value.length == 0){
+			this.setState((state)=>{
+				const newState={
+					...state
+				};
+				newState.formErrors = {
+					emptyNameError: true
+				};
+				return newState;
+			});
 			return;
 		}
 		const ph=document.getElementById(phoneInputID).value;
 		if(ph.length == 0){
+			this.setState((state)=>{
+				const newState={
+					...state
+				};
+				newState.formErrors = {
+					emptyPhoneError: true
+				};
+				return newState;
+			});
 			return;
 		}
 		const format1 = /\+{1}\d{11}/;
@@ -287,16 +313,43 @@ export class App extends React.Component {
 
 		if(!(format1.test(ph)&&ph.length==12) &&
 			!(format2.test(ph)&&ph.length==11)){
+			this.setState((state)=>{
+				const newState={
+					...state
+				};
+				newState.formErrors = {
+					incorrectPhoneError: true
+				};
+				return newState;
+			});
 			return;
 		}
 		if(document.getElementById(addressInputID).value.length == 0){
+			this.setState((state)=>{
+				const newState={
+					...state
+				};
+				newState.formErrors = {
+					emptyAddressError: true
+				};
+				return newState;
+			});
 			return;
 		}
 
-		const amountOfPizza=0;
-		const amountOfDrink=0;
+		// const amountOfPizza=0;
+		// const amountOfDrink=0;
 		const {productList, cart}=this.state;
 		if(cart==undefined||cart.length==0){
+			this.setState((state)=>{
+				const newState={
+					...state
+				};
+				newState.formErrors = {
+					emptyCartError: true
+				};
+				return newState;
+			});
 			return;
 		}
 		/* const orderProductList = cart.reduce((accumulator, itemAndQ)=>{
@@ -307,6 +360,8 @@ export class App extends React.Component {
 			};
 		}, []); */
 		const products=[];
+		let amountOfPizza = 0;
+		let amountOfDrink = 0;
 		for(let i=0;i<cart.length;i+=1){
 			for(let k=0;k<productList.pizza.length;k+=1){
 				if(cart[i].id==productList.pizza[k].id){
@@ -316,6 +371,7 @@ export class App extends React.Component {
 							...productList.pizza[k],
 							type: "pizza"
 						});
+						amountOfPizza+=1;
 					}
 				}
 			}
@@ -329,9 +385,22 @@ export class App extends React.Component {
 							...productList.drinks[k],
 							type: "drink"
 						});
+						amountOfDrink+=1;
 					}
 				}
 			}
+		}
+		if(amountOfPizza>5||amountOfDrink>4){
+			this.setState((state)=>{
+				const newState={
+					...state
+				};
+				newState.formErrors = {
+					tooManyItemsError: true
+				};
+				return newState;
+			});
+			return;
 		}
 		const orderObject = {
 			id: uuidv4(),
@@ -340,7 +409,8 @@ export class App extends React.Component {
 			phoneNumber: document.getElementById(phoneInputID).value,
 			address: document.getElementById(addressInputID).value,
 			payMethod: document.getElementById(paymentTypeID).value,
-			// amountOfDrink: 0,
+			amountOfDrink,
+			amountOfPizza
 			// amountOfPizza: 1
 		}
 		console.log("orderObject");
@@ -411,7 +481,7 @@ export class App extends React.Component {
 				ingredients: "Неаполитанский соус, сервелат, колбаски, куриная копченая грудка."
 			}
 		];
-		const {isCartOpen, formsStatesAndSubWindows, productList, userInfo, cart} = this.state;
+		const {isCartOpen, formsStatesAndSubWindows, productList, userInfo, cart, formErrors} = this.state;
 		console.log("pizza");
 		console.log(productList!==undefined?productList.pizza:"productList is undefined still");
 		return (
@@ -448,7 +518,13 @@ export class App extends React.Component {
 							console.log(isCartOpen);
 							if(isCartOpen) {
 								res.push(<StyledShadow key="basketWindow">
-									<Cart onClose = {this.cartClosingHadler} userInfo = {userInfo} cart = {cart} productList={productList} onIncrease = {this.increaseQuantityInCartHandler} onDecrease={this.decreaseQuantityInCartHandler} onDeleteItem={this.deleteItemFromCartHandler} onOrderSubmit={this.orderSubmitHandler}/>
+									<Cart onClose = {this.cartClosingHadler} userInfo = {userInfo}
+										  cart = {cart} productList={productList}
+										  onIncrease = {this.increaseQuantityInCartHandler}
+										  onDecrease={this.decreaseQuantityInCartHandler}
+										  onDeleteItem={this.deleteItemFromCartHandler}
+										  onOrderSubmit={this.orderSubmitHandler}
+										  formErrors = {formErrors}/>
 								</StyledShadow>);
 							}
 							if(formsStatesAndSubWindows!==undefined && formsStatesAndSubWindows.isThanksWindowOpened) {

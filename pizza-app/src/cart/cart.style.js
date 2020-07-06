@@ -158,3 +158,8 @@ export const StyledItemDeleteButton=styled.button`
 	width: 28px;
 	border-style: none;
 `;
+
+export const StyledErrorMessage=styled.p`
+	font-size: 50%;
+	color: red;
+`;

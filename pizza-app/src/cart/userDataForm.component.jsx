@@ -3,7 +3,8 @@ import {StyledCartRightBlock,
 	StyledCloseButton,
 	StyledSubmitButton,
 	StyledTextInput,
-	StyledSelectField
+	StyledSelectField,
+	StyledErrorMessage
 } from "./cart.style";
 import {cartCloseIcon} from "./images";
 import {addressInputID, nameInputID, needChangeFromID, paymentTypeID, phoneInputID} from "./cartFormInputIds";
@@ -13,7 +14,7 @@ export function UserDataForm(props) {
 		console.log("UserDataForm constructor entered");
 		super(props); */
 	const testString = "I am going from far sub-child to far sub-parent";
-	const {onClose, userInfo, cart, onOrderSubmit}=props;
+	const {onClose,onOrderSubmit, userInfo, cart, formErrors}=props;
 	const name = (() => {
 		console.log("userInfo");
 		console.log(userInfo);
@@ -47,10 +48,14 @@ export function UserDataForm(props) {
 			<form>
 				<p>ФИО</p>
 				<StyledTextInput id={nameInputID} defaultValue={name} />
+				{formErrors.emptyNameError?<StyledErrorMessage>Имя должно быть не пусто</StyledErrorMessage>:[]}
 				<p>Телефон</p>
 				<StyledTextInput id={phoneInputID} defaultValue={phone} />
+				{formErrors.emptyPhoneError?<StyledErrorMessage>Следует указать телефон</StyledErrorMessage>:[]}
+				{formErrors.incorrectPhoneError?<StyledErrorMessage>Телефон имеет неверный формат</StyledErrorMessage>:[]}
 				<p>Адрес</p>
 				<StyledTextInput id={addressInputID} defaultValue={address}/>
+				{formErrors.emptyAddressError?<StyledErrorMessage>Следует указать адрес доставки</StyledErrorMessage>:[]}
 				<p>Тип оплаты</p>
 				<StyledSelectField id={paymentTypeID} defaultValue={paymentType}>
 					<option value="CASH">Наличными</option>
@@ -63,6 +68,8 @@ export function UserDataForm(props) {
 				<StyledSubmitButton type="button" onClick={onOrderSubmit}>
 					Оформить заказ
 				</StyledSubmitButton>
+				{formErrors.emptyCartError?<StyledErrorMessage>Корзина не может быть пуста</StyledErrorMessage>:[]}
+				{formErrors.tooManyItemsError?<StyledErrorMessage>К сожалению, мы не сможем доставить больше 5 пицц и 4 напитков</StyledErrorMessage>:[]}
 			</form>
 		</StyledCartRightBlock>
 		<StyledCloseButton onClick={()=>{onClose(testString);}}>

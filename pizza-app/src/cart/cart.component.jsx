@@ -40,7 +40,8 @@ export const cartContentTemplate = {
 export function Cart(props){
 	/* constructor(props) {
 		super(props); */
-	const {onClose, userInfo, cart, productList, onIncrease, onDecrease, onDeleteItem, onOrderSubmit}=props;
+	const {onClose, userInfo, cart, productList, onIncrease,
+		onDecrease, onDeleteItem, onOrderSubmit, formErrors}=props;
 	console.log("Cart entered");
 	console.log(cart);
 	console.log("productList");
@@ -97,7 +98,9 @@ export function Cart(props){
 			{cart!==undefined?cart.map(itemBlock):""}
 			<p>Итог {totalCost} руб.</p>
 		</StyledCartLeftBlock>
-		<UserDataForm onClose={onClose} userInfo = {userInfo} cart={cart} onOrderSubmit={onOrderSubmit}/>
+		<UserDataForm onClose={onClose} userInfo = {userInfo}
+			  cart={cart} onOrderSubmit={onOrderSubmit}
+			  formErrors={formErrors}/>
 	</StyledCart>;
 	/* } */
 };
