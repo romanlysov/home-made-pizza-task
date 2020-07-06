@@ -15,7 +15,7 @@ import {StyledCart,
 	StyledPrice,
 	StyledModifyQuantityButtonsBlock,
 	StyledModifyButton,
-	StyledQuantityLabel
+	StyledQuantityLabel,
 } from "./cart.style";
 import {cartCloseIcon,
 	minusButton,
@@ -94,7 +94,7 @@ export function Cart(props){
 	return <StyledCart>
 		<StyledCartLeftBlock>
 			{cart!==undefined?cart.map(itemBlock):""}
-			<p>Итого {totalCost} руб.</p>
+			<p>Итог {totalCost} руб.</p>
 		</StyledCartLeftBlock>
 		<UserDataForm onClose={onClose} userInfo = {userInfo} cart={cart} onOrderSubmit={onOrderSubmit}/>
 	</StyledCart>;

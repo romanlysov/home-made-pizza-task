@@ -4,7 +4,7 @@ import {meatPizzaImage} from "../contentBlock/images";
 
 export const StyledCart= styled.div`
 	width: 70%;
-	height: 70%;
+	height: 75%;
 	background: #8A5C0E;
 	border-radius: 28px;
 	padding: 45px;
@@ -57,8 +57,9 @@ export const StyledSelectField = styled.select`
 `;
 
 export const StyledSubmitButton = styled.button`
+    margin-top: 10px;
 	height: 20px;
-	width: 100px;
+        width: 177px;
 `;
 
 export const StyledCloseButton=styled.button`
@@ -85,7 +86,7 @@ export const StyledItemIcon=styled.div`
     margin-left: auto;
     margin-right: auto;
     background: url(${meatPizzaImage}) center no-repeat;
-    background-size: 60% 60%;    
+    background-size: 100px 100px;    
 	width: 20%;
 	height: 90%;
 `;
@@ -98,7 +99,12 @@ export const StyledItemInfo=styled.div`
 	justify-content: space-between;
 	align-items: center;
 `;
-
+export const StyledResult=styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+`;
 export const StyledLabel=styled.div`
 	width: 100%;
 	display: flex;
