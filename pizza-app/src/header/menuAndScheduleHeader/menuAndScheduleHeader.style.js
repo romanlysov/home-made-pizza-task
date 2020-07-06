@@ -25,6 +25,8 @@ export const ElementOfMenu = styled.div`
     transition: 0.25s linear;
     display: flex;
     cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: #572000;
     &:hover{
        color: #ecba04;
        text-decoration: underline;

@@ -59,6 +59,7 @@ export function UserDataForm(props) {
 				<p>Нужна сдача с</p>
 				<StyledTextInput id={needChangeFromID} defaultValue={needChangeFrom} />
 				{/* TODO: prevent from submit */}
+				<div />
 				<StyledSubmitButton type="button" onClick={onOrderSubmit}>
 					Оформить заказ
 				</StyledSubmitButton>

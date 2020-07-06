@@ -6,18 +6,22 @@ export const StyledCart= styled.div`
 	width: 70%;
 	height: 70%;
 	background: #8A5C0E;
-	border-radius: 10px;
+	border-radius: 28px;
 	padding: 45px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
+	border: 3px solid #664409;
 	
 `;
 
 export const StyledCartLeftBlock = styled.div`
 	background: #F9F0DC;
-	width: 55%;
-	height: 80%;
+	border-radius: 10px;
+	border: 3px solid #f2dbaa;
+	overflow-y: scroll;
+	width: 50%;
+	height: 90%;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-begin;
@@ -27,8 +31,10 @@ export const StyledCartLeftBlock = styled.div`
 
 export const StyledCartRightBlock = styled.div`
 	background: #F9F0DC;
-	width: 30%;
-	height: 80%;
+	border-radius: 10px;
+	border: 3px solid #f2dbaa;
+	width: 35%;
+	height: 90%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
@@ -65,10 +71,9 @@ export const StyledCloseButton=styled.button`
 `;
 
 export const StyledItemBlock=styled.div`
-	width: 100%;
+	width: 90%;
 	height: 100px;
-	border-radius: 10px;
-	border-style: none none solid;
+	border-style: none solid #f2dbaa;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -88,7 +93,6 @@ export const StyledItemIcon=styled.div`
 export const StyledItemInfo=styled.div`
 	width: 60%;
 	height: 90%;
-	background: grey;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
