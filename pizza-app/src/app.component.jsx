@@ -46,7 +46,7 @@ export class App extends React.Component {
 			dat = data;
 			console.log("Get query in ComponentDidMount");
 			console.log(data);
-			const groupedProducts = data.reduce((acc, product)=>{
+			const groupedProducts = (typeof(data)=="object"&&data[0]!==undefined?data.reduce((acc, product)=>{
 				const isPizza = product.pizzaType !== undefined;
 				if(isPizza){
 					acc.pizza.push(product);
@@ -55,7 +55,7 @@ export class App extends React.Component {
 					acc.drinks.push(product);
 				}
 				return acc;
-			}, {pizza: [], drinks: []});
+			}, {pizza: [], drinks: []}):undefined);
 			this.setState((state)=>{
 				const newState = {
 					...this.state,
@@ -423,6 +423,18 @@ export class App extends React.Component {
 			.then((data)=>{
 				console.log("Then method in orderSubmitHandler entered");
 				console.log(data);
+				if(data!==true){
+					this.setState((state)=>{
+						const newState={
+							...state
+						};
+						newState.formErrors = {
+							orderSendingError: true
+						};
+						return newState;
+					});
+					return;
+				}
 				this.setState((state)=>{
 					const {productList: productList1}=state;
 					const newState = {
@@ -534,7 +546,7 @@ export class App extends React.Component {
 								console.log(formsStatesAndSubWindows);
 								console.log(this.state);
 								res.push(<StyledShadow key="orderCompleteWindow">
-									<MessageWindow message = "Спасибо за оформление заказа! Ожидайте звонка оператора" type="thanks" onClose ={this.messageWindowCloseHandler}/>
+									<MessageWindow message = "Спасибо за оформление заказа! Ожидайте звонка оператора!" type="thanks" onClose ={this.messageWindowCloseHandler}/>
 								</StyledShadow>);
 							}
 							return res;

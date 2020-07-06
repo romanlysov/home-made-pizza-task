@@ -68,6 +68,7 @@ export function UserDataForm(props) {
 				<StyledSubmitButton type="button" onClick={onOrderSubmit}>
 					Оформить заказ
 				</StyledSubmitButton>
+				{formErrors.orderSendingError?<StyledErrorMessage>Ошибка при отправке заказа. Возможно, сервер недоступен</StyledErrorMessage>:[]}
 				{formErrors.emptyCartError?<StyledErrorMessage>Корзина не может быть пуста</StyledErrorMessage>:[]}
 				{formErrors.tooManyItemsError?<StyledErrorMessage>К сожалению, мы не сможем доставить больше 5 пицц и 4 напитков</StyledErrorMessage>:[]}
 			</form>

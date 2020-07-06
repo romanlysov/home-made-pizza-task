@@ -12,8 +12,8 @@ export const StyledMessageWindow= styled.div`
 `;
 
 export const StyledButtonBlock = styled.div`
-	width: 80%;
-	height: 20%;
+	width: 100%;
+	height: 10%;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: row;
@@ -22,13 +22,17 @@ export const StyledButtonBlock = styled.div`
 `;
 
 export const StyledMessageBlock = styled.div`
-	width: 80%;
-	height: 70%;
+	width: 100%;
+	height: 80%;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;	
 	align-items: center;
+	
+	font: normal 150% 'trebuchet ms', sans-serif;
+	font-weight:bold;
+	text-align: center;
 `;
 
 export const StyledCloseMessageWindowButton=styled.button`
