@@ -51,11 +51,11 @@ export const StyledPrice = styled.div`
 export const StyledBuyButton=styled.button`
 	background: #CCBCBC;
 	height: 28px;
-	width: 100px;
+	width: 130px;
 	border: 2px solid #BCACAC;
 	border-radius: 12px;
 	cursor:pointer;
-	margin-left: 60px;
+	margin-left: 50px;
 `;
 export const StyledButtonText=styled.button`
 	font: normal 100% 'trebuchet ms', sans-serif;

@@ -49,4 +49,5 @@ export const StyledSupportContactsBlock = styled.div`
 `;
 
 export const StyledSocialNetIcon = styled.div`
+    cursor:pointer;
 `;
