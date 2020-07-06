@@ -130,8 +130,11 @@ export class App extends React.Component {
 			cart,
 			productList,
 			userInfo,
-			isThanksWindowOpened: false,
-			isErrorSubmitWindowOpened: false
+			formsStatesAndSubWindows: {
+				isThanksWindowOpened: false,
+				crutch: document.body,
+				isErrorWindowOpened: false
+			}
 		};
 		this.state=newState;
 		console.log("New state:");
@@ -270,9 +273,32 @@ export class App extends React.Component {
 		// event.preventDefault();
 		console.log("orderSubmitHandler Works!!!");
 		console.log(this.state);
+
+
+		if(document.getElementById(nameInputID).value.length == 0){
+			return;
+		}
+		const ph=document.getElementById(phoneInputID).value;
+		if(ph.length == 0){
+			return;
+		}
+		const format1 = /\+{1}\d{11}/;
+		const format2 = /\d{11}/;
+
+		if(!(format1.test(ph)&&ph.length==12) &&
+			!(format2.test(ph)&&ph.length==11)){
+			return;
+		}
+		if(document.getElementById(addressInputID).value.length == 0){
+			return;
+		}
+
 		const amountOfPizza=0;
 		const amountOfDrink=0;
 		const {productList, cart}=this.state;
+		if(cart==undefined||cart.length==0){
+			return;
+		}
 		/* const orderProductList = cart.reduce((accumulator, itemAndQ)=>{
 			console.log("Entered cart.reduce in order send method");
 			accumulator.push(itemAndQ.id);
@@ -333,7 +359,11 @@ export class App extends React.Component {
 						productList,
 						isCartOpen: false,
 						cart: [],
-						isThanksWindowOpened: true
+						formsStatesAndSubWindows: {
+							isThanksWindowOpened: true,
+							// crutch: document.body,
+							isErrorWindowOpened: false
+						}
 					};
 					return newState;
 				});
@@ -380,7 +410,7 @@ export class App extends React.Component {
 				ingredients: "Неаполитанский соус, сервелат, колбаски, куриная копченая грудка."
 			}
 		];
-		const {isCartOpen, isThanksWindowOpened, productList, userInfo, cart} = this.state;
+		const {isCartOpen, formsStatesAndSubWindows, productList, userInfo, cart} = this.state;
 		console.log("pizza");
 		console.log(productList!==undefined?productList.pizza:"productList is undefined still");
 		return (
@@ -409,6 +439,22 @@ export class App extends React.Component {
 					<AboutUs/>
 					<a name="contacts"/>
 					<Contacts/>
+
+					{
+						(()=>{
+							console.log("Thanks modal window function entered");
+							console.log(isCartOpen);
+							console.log(formsStatesAndSubWindows);
+							console.log(this.state);
+							if(formsStatesAndSubWindows && formsStatesAndSubWindows.isThanksWindowOpened) {
+								console.log("entered rendering message window in function");
+								return <StyledShadow>
+									<MessageWindow message = "Спасибо за оформление заказа! Ожидайте звонка оператора" type="thanks" onClose ={this.messageWindowCloseHandler}/>
+								</StyledShadow>;
+							}
+							return "";
+						})()
+					}
 					<Footer/>
 					{
 						(()=>{
@@ -417,18 +463,6 @@ export class App extends React.Component {
 							if(isCartOpen) {
 								return <StyledShadow>
 									<Cart onClose = {this.cartClosingHadler} userInfo = {userInfo} cart = {cart} productList={productList} onIncrease = {this.increaseQuantityInCartHandler} onDecrease={this.decreaseQuantityInCartHandler} onDeleteItem={this.deleteItemFromCartHandler} onOrderSubmit={this.orderSubmitHandler}/>
-								</StyledShadow>;
-							}
-							return "";
-						})()
-					}
-					{
-						(()=>{
-							console.log("Thanks modal window function entered");
-							console.log(isCartOpen);
-							if(isThanksWindowOpened) {
-								return <StyledShadow>
-									<MessageWindow message = "Спасибо за оформление заказа! Ожидайте звонка оператора" type="thanks" onClose ={this.messageWindowCloseHandler}/>
 								</StyledShadow>;
 							}
 							return "";

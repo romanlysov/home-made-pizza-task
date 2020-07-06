@@ -63,7 +63,7 @@ export function Cart(props){
 				return acc;
 			}, {label: "Unknown", price: "Unknown"}) : {label: "Unknown", price: "Unknown"};
 		}
-		return <StyledItemBlock>
+		return <StyledItemBlock key={itemInCart.id}>
 			<StyledItemIcon />
 			<StyledItemInfo>
 				<StyledLabel>

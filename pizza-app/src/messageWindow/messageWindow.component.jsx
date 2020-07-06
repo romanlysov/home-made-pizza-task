@@ -10,7 +10,7 @@ export function MessageWindow(props){
 	const {message, type, onClose} = props;
 	return <StyledMessageWindow>
 		<StyledButtonBlock>
-			<StyledCloseMessageWindowButton onClick = {()=>{console.log("message window is closing"); onClose(type);}}>
+			<StyledCloseMessageWindowButton onClick = {()=>{window.location.reload(); console.log("message window is closing"); onClose(type);}}>
 				<img src={cartCloseIcon} />
 			</StyledCloseMessageWindowButton>
 		</StyledButtonBlock>
