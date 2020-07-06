@@ -136,10 +136,10 @@ export class App extends React.Component {
 				isErrorWindowOpened: false
 			}
 		};
-		this.state=newState;
+		this.setState(newState);
 		console.log("New state:");
 		console.log(this.state);
-		this.render();
+		// this.render();
 	};
 
 	addToCartHandler = (itemID) => {
@@ -354,9 +354,10 @@ export class App extends React.Component {
 				console.log("Then method in orderSubmitHandler entered");
 				console.log(data);
 				this.setState((state)=>{
+					const {productList: productList1}=state;
 					const newState = {
 						// TODO: userInfo
-						productList,
+						productList: productList1,
 						isCartOpen: false,
 						cart: [],
 						formsStatesAndSubWindows: {
@@ -439,33 +440,28 @@ export class App extends React.Component {
 					<AboutUs/>
 					<a name="contacts"/>
 					<Contacts/>
-
-					{
-						(()=>{
-							console.log("Thanks modal window function entered");
-							console.log(isCartOpen);
-							console.log(formsStatesAndSubWindows);
-							console.log(this.state);
-							if(formsStatesAndSubWindows && formsStatesAndSubWindows.isThanksWindowOpened) {
-								console.log("entered rendering message window in function");
-								return <StyledShadow>
-									<MessageWindow message = "Спасибо за оформление заказа! Ожидайте звонка оператора" type="thanks" onClose ={this.messageWindowCloseHandler}/>
-								</StyledShadow>;
-							}
-							return "";
-						})()
-					}
 					<Footer/>
 					{
 						(()=>{
+							const res=[];
 							console.log("Footer function entered");
 							console.log(isCartOpen);
 							if(isCartOpen) {
-								return <StyledShadow>
+								res.push(<StyledShadow key="basketWindow">
 									<Cart onClose = {this.cartClosingHadler} userInfo = {userInfo} cart = {cart} productList={productList} onIncrease = {this.increaseQuantityInCartHandler} onDecrease={this.decreaseQuantityInCartHandler} onDeleteItem={this.deleteItemFromCartHandler} onOrderSubmit={this.orderSubmitHandler}/>
-								</StyledShadow>;
+								</StyledShadow>);
 							}
-							return "";
+							if(formsStatesAndSubWindows!==undefined && formsStatesAndSubWindows.isThanksWindowOpened) {
+								console.log("entered rendering message window in function");
+								console.log("Thanks modal window function entered");
+								console.log(isCartOpen);
+								console.log(formsStatesAndSubWindows);
+								console.log(this.state);
+								res.push(<StyledShadow key="orderCompleteWindow">
+									<MessageWindow message = "Спасибо за оформление заказа! Ожидайте звонка оператора" type="thanks" onClose ={this.messageWindowCloseHandler}/>
+								</StyledShadow>);
+							}
+							return res;
 						})()
 					}
 				</StyledAppContainer>

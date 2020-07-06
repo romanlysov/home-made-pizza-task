@@ -58,14 +58,14 @@ export const StyledBuyButton=styled.button`
 	cursor:pointer;
 	margin-left: 50px;
 `;
-export const StyledButtonText=styled.button`
+export const StyledButtonText=styled.p`
 	font: normal 100% 'trebuchet ms', sans-serif;
 	font-weight: bold;
 	background-color: #CCBCBC;
 	margin: auto;
 	border: none;
 `;
-export const StyledPriceLine=styled.button`
+export const StyledPriceLine=styled.div`
     border: none;
     background-color: #F9F0DC;
     display:flex;
