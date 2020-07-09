@@ -5,6 +5,6 @@ import {MenuAndScheduleHeader} from "../menuAndScheduleHeader/menuAndScheduleHea
 export function BasketIcon(props) {
 	const {onCartIconClick}=props;
 	return(
-		<StyledBasketIcon onClick={onCartIconClick}/>
+		<StyledBasketIcon id="basket_icon" onClick={onCartIconClick}/>
 	)
 }

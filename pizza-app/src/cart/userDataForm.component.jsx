@@ -48,14 +48,14 @@ export function UserDataForm(props) {
 			<form>
 				<p>ФИО</p>
 				<StyledTextInput id={nameInputID} defaultValue={name} />
-				{formErrors.emptyNameError?<StyledErrorMessage>Имя должно быть не пусто</StyledErrorMessage>:[]}
+				{formErrors.emptyNameError?<StyledErrorMessage id="name_error">Имя должно быть не пусто</StyledErrorMessage>:[]}
 				<p>Телефон</p>
 				<StyledTextInput id={phoneInputID} defaultValue={phone} />
-				{formErrors.emptyPhoneError?<StyledErrorMessage>Следует указать телефон</StyledErrorMessage>:[]}
-				{formErrors.incorrectPhoneError?<StyledErrorMessage>Телефон имеет неверный формат</StyledErrorMessage>:[]}
+				{formErrors.emptyPhoneError?<StyledErrorMessage id="phone_error">Следует указать телефон</StyledErrorMessage>:[]}
+				{formErrors.incorrectPhoneError?<StyledErrorMessage id="phone_error">Телефон имеет неверный формат</StyledErrorMessage>:[]}
 				<p>Адрес</p>
 				<StyledTextInput id={addressInputID} defaultValue={address}/>
-				{formErrors.emptyAddressError?<StyledErrorMessage>Следует указать адрес доставки</StyledErrorMessage>:[]}
+				{formErrors.emptyAddressError?<StyledErrorMessage id="address_error">Следует указать адрес доставки</StyledErrorMessage>:[]}
 				<p>Тип оплаты</p>
 				<StyledSelectField id={paymentTypeID} defaultValue={paymentType}>
 					<option value="CASH">Наличными</option>
@@ -65,15 +65,15 @@ export function UserDataForm(props) {
 				<StyledTextInput id={needChangeFromID} defaultValue={needChangeFrom} />
 				{/* TODO: prevent from submit */}
 				<div />
-				<StyledSubmitButton type="button" onClick={onOrderSubmit}>
+				<StyledSubmitButton id="order_submit_button" type="button" onClick={onOrderSubmit}>
 					Оформить заказ
 				</StyledSubmitButton>
-				{formErrors.orderSendingError?<StyledErrorMessage>Ошибка при отправке заказа. Возможно, сервер недоступен</StyledErrorMessage>:[]}
-				{formErrors.emptyCartError?<StyledErrorMessage>Корзина не может быть пуста</StyledErrorMessage>:[]}
-				{formErrors.tooManyItemsError?<StyledErrorMessage>К сожалению, мы не сможем доставить больше 5 пицц и 4 напитков</StyledErrorMessage>:[]}
+				{formErrors.orderSendingError?<StyledErrorMessage id="order_send_error">Ошибка при отправке заказа. Возможно, сервер недоступен</StyledErrorMessage>:[]}
+				{formErrors.emptyCartError?<StyledErrorMessage id="order_send_error">Корзина не может быть пуста</StyledErrorMessage>:[]}
+				{formErrors.tooManyItemsError?<StyledErrorMessage id="order_send_error">К сожалению, мы не сможем доставить больше 5 пицц и 4 напитков</StyledErrorMessage>:[]}
 			</form>
 		</StyledCartRightBlock>
-		<StyledCloseButton onClick={()=>{onClose(testString);}}>
+		<StyledCloseButton id="cart_close_button" onClick={()=>{onClose(testString);}}>
 			{ /* <StyledCloseButton onClick={onClose}> */ }
 			<img src={cartCloseIcon} />
 		</StyledCloseButton>

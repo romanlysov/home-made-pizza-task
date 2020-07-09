@@ -11,7 +11,7 @@ export function FourItemsBlock(props) {
 	// console.log(child2);
 	// console.log(props);
 	if(items!==undefined){
-		return <StyledFourItemsBlock>
+		return <StyledFourItemsBlock id="four_items_block">
 			{items.map(item => <ItemCard key={`card ${item.id}`} item = {item} cart={cart} onAddToCart={onAddToCart}/>)}
 		</StyledFourItemsBlock>;
 	}

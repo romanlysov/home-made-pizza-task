@@ -54,11 +54,11 @@ export function ItemCard(props){
 	} )():"Купить";
 	const buttonID = `${"button_add"} ${item.id}`;
 
-	return <StyledItemCard>
+	return <StyledItemCard id="menu_item_card">
 		<StyledPizza background={imageToItemMapper(item.productName)}/>
 		<StyledSubMenuOfPizza>
-			<StyledNameOfPizza>{item.productName}</StyledNameOfPizza>
-			<StyledStructureOfPizza>{Ingredients}</StyledStructureOfPizza>
+			<StyledNameOfPizza id="menu_item_label">{item.productName}</StyledNameOfPizza>
+			<StyledStructureOfPizza id="menu_item_ingredients">{Ingredients}</StyledStructureOfPizza>
 			<StyledNutritionalValueOfPizza>
 				<div>
 					<p>{item.nutritionalValue}</p>
@@ -66,9 +66,9 @@ export function ItemCard(props){
 						item.ccal!==undefined?(<p>{item.ccal} ккал./100 гр.</p>):""
 					}
 					<StyledPriceLine>
-						<StyledPrice>{item.price} руб.</StyledPrice>
-						<StyledBuyButton value={buttonID} onClick={()=>{onAddToCart(item.id);}}>
-							<StyledButtonText>{buyButtonValue}</StyledButtonText>
+						<StyledPrice id="menu_item_price">{item.price} руб.</StyledPrice>
+						<StyledBuyButton id="menu_item_add_to_basket_button" value={buttonID} onClick={()=>{onAddToCart(item.id);}}>
+							<StyledButtonText id="menu_item_button_text">{buyButtonValue}</StyledButtonText>
 						</StyledBuyButton>
 					</StyledPriceLine>
 				</div>

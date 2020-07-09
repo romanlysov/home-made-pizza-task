@@ -4,7 +4,7 @@ import {StyledMenuButton} from "./menuButton.style";
 
 export function MenuButton(props) {
 	const {background} = props;
-	return <StyledMenuButton>
+	return <StyledMenuButton id="menu_shortcut_icon">
 		<img src={background} />
 	</StyledMenuButton>;
 }

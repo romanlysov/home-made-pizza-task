@@ -5,13 +5,13 @@ import {StyledMenuAndScheduleHeader, Menu, ElementOfMenu,StyledOfTime} from "./m
 export const MenuAndScheduleHeader = () => {
 	return(
 		<StyledMenuAndScheduleHeader>
-			<StyledOfTime>Время работы: 09:00 - 21:00</StyledOfTime>
+			<StyledOfTime id="schedule_time">Время работы: 09:00 - 21:00</StyledOfTime>
 			<Menu>
-				<a href="#"><ElementOfMenu >Главная</ElementOfMenu></a>
-				<a href="#menu"><ElementOfMenu>Меню</ElementOfMenu></a>
-				<a href="#about"><ElementOfMenu>О нас</ElementOfMenu></a>
-				<a href="#delivery"><ElementOfMenu>Доставка</ElementOfMenu></a>
-				<a href="#contacts"><ElementOfMenu>Контакты</ElementOfMenu></a>
+				<a id = "main_page_shortcut" href="#"><ElementOfMenu >Главная</ElementOfMenu></a>
+				<a id = "menu_shortcut" href="#menu"><ElementOfMenu>Меню</ElementOfMenu></a>
+				<a id = "about_shortcut" href="#about"><ElementOfMenu>О нас</ElementOfMenu></a>
+				<a id = "delivery_shortcut" href="#delivery"><ElementOfMenu>Доставка</ElementOfMenu></a>
+				<a id = "contacts_shortcut" href="#contacts"><ElementOfMenu>Контакты</ElementOfMenu></a>
 			</Menu>
 		</StyledMenuAndScheduleHeader>
 	)

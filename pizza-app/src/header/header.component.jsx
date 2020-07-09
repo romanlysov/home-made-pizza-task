@@ -9,7 +9,7 @@ export function Header(props){
 	console.log("Header props");
 	console.log(props);
 	const {onCartIconClick} = props;
-	return <StyledHeader>
+	return <StyledHeader id="header_block">
 		<StyledLogoCompany>
 			<Logo />
 			<CompanyName />

@@ -10,7 +10,7 @@ export function ContentBlock(props) {
 	console.log("ContentBlock's cart");
 	console.log(cart);
 	console.log([{id: "5fa15f7f-799b-4423-9d89-5fa1192db915", quantity: 4}]);
-	return <StyledContentBlock>
+	return <StyledContentBlock id="content_block">
 		<SiteBlockLabel background={labelImage}/>
 		<FourItemsBlock items={items} cart={cart} onAddToCart={onAddToCart} />
 	</StyledContentBlock>;

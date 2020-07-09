@@ -499,12 +499,12 @@ export class App extends React.Component {
 		return (
 			<Router>
 				<StyledAppContainer>
-					<Header onCartIconClick = {this.cartOpeningHadler}/>
+					<Header id="header" onCartIconClick = {this.cartOpeningHadler}/>
 					<DescribeFrontImage/>
 					<a name="menu"/>
-					<MenuBar/>
+					<MenuBar id="menu_block" />
 					<a name="OpenPizza"/>
-					<ContentBlock labelImage={openPizzaLabelImage} items={productList!==undefined?productList.pizza:[]} cart={cart!==undefined?cart:[]} onAddToCart={this.addToCartHandler}/>
+					<ContentBlock id="pizza_block" labelImage={openPizzaLabelImage} items={productList!==undefined?productList.pizza:[]} cart={cart!==undefined?cart:[]} onAddToCart={this.addToCartHandler}/>
 					{
 						/* for(i=0;i<3;i++) */
 					}
@@ -514,23 +514,23 @@ export class App extends React.Component {
 						 */
 					}
 					<a name="Drinks" />
-					<ContentBlock labelImage={drinksLabelImage} items={productList!==undefined?productList.drinks:[]} cart={cart!==undefined?cart:[]} onAddToCart={this.addToCartHandler}/>
+					<ContentBlock id="drinks" labelImage={drinksLabelImage} items={productList!==undefined?productList.drinks:[]} cart={cart!==undefined?cart:[]} onAddToCart={this.addToCartHandler}/>
 
 					<a name="delivery"/>
 					<Delivery/>
 					<a name="about"/>
-					<AboutUs/>
+					<AboutUs id="about_block"/>
 					<a name="contacts"/>
-					<Contacts/>
-					<Footer/>
+					<Contacts id="contacts_block"/>
+					<Footer id="footer_block"/>
 					{
 						(()=>{
 							const res=[];
 							console.log("Footer function entered");
 							console.log(isCartOpen);
 							if(isCartOpen) {
-								res.push(<StyledShadow key="basketWindow">
-									<Cart onClose = {this.cartClosingHadler} userInfo = {userInfo}
+								res.push(<StyledShadow id="cart_shadow_block" key="basketWindow">
+									<Cart id="cart_popup" onClose = {this.cartClosingHadler} userInfo = {userInfo}
 										  cart = {cart} productList={productList}
 										  onIncrease = {this.increaseQuantityInCartHandler}
 										  onDecrease={this.decreaseQuantityInCartHandler}
@@ -545,8 +545,8 @@ export class App extends React.Component {
 								console.log(isCartOpen);
 								console.log(formsStatesAndSubWindows);
 								console.log(this.state);
-								res.push(<StyledShadow key="orderCompleteWindow">
-									<MessageWindow message = "Спасибо за оформление заказа! Ожидайте звонка оператора!" type="thanks" onClose ={this.messageWindowCloseHandler}/>
+								res.push(<StyledShadow id="thanks_popup_shadow" key="orderCompleteWindow">
+									<MessageWindow id="thanks_popup" message = "Спасибо за оформление заказа! Ожидайте звонка оператора!" type="thanks" onClose ={this.messageWindowCloseHandler}/>
 								</StyledShadow>);
 							}
 							return res;

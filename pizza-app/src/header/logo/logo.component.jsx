@@ -3,6 +3,6 @@ import {StyledLogo} from "./logo.style";
 
 export const Logo = () => {
 	return(
-		<StyledLogo />
+		<StyledLogo id="company_logo"/>
 	)
 }

@@ -65,24 +65,24 @@ export function Cart(props){
 				return acc;
 			}, {label: "Unknown", price: "Unknown"}) : {label: "Unknown", price: "Unknown"};
 		}
-		return <StyledItemBlock key={itemInCart.id}>
-			<StyledItemIcon background={imageToItemMapper(productLabelAndPrice.label)}/>
+		return <StyledItemBlock id="item_basket_block" key={itemInCart.id}>
+			<StyledItemIcon id="item_basket_icon" background={imageToItemMapper(productLabelAndPrice.label)}/>
 			<StyledItemInfo>
-				<StyledLabel>
+				<StyledLabel id="item_basket_label">
 					<p>{productLabelAndPrice.label}</p>
 				</StyledLabel>
 				<StyledPriceAndButtonsContainer>
-					<StyledPrice>
+					<StyledPrice id="item_basket_price">
 						<p>{productLabelAndPrice.price} руб.</p>
 					</StyledPrice>
 					<StyledModifyQuantityButtonsBlock>
-						<StyledModifyButton onClick={()=>{onDecrease(itemInCart.id)}}>
+						<StyledModifyButton id="item_minus_button" onClick={()=>{onDecrease(itemInCart.id)}}>
 							<img src={minusButton} />
 						</StyledModifyButton>
-						<StyledQuantityLabel>
+						<StyledQuantityLabel id="item_quantity_basket">
 							<p>{itemInCart.quantity}</p>
 						</StyledQuantityLabel>
-						<StyledModifyButton onClick={()=>{onIncrease(itemInCart.id)}} >
+						<StyledModifyButton id="item_plus_button" onClick={()=>{onIncrease(itemInCart.id)}} >
 							<img src={plusButton} />
 						</StyledModifyButton>
 					</StyledModifyQuantityButtonsBlock>
@@ -98,7 +98,7 @@ export function Cart(props){
 			{cart!==undefined?cart.map(itemBlock):""}
 			<p>Итог {totalCost} руб.</p>
 		</StyledCartLeftBlock>
-		<UserDataForm onClose={onClose} userInfo = {userInfo}
+		<UserDataForm id="user_data_form" onClose={onClose} userInfo = {userInfo}
 			  cart={cart} onOrderSubmit={onOrderSubmit}
 			  formErrors={formErrors}/>
 	</StyledCart>;
