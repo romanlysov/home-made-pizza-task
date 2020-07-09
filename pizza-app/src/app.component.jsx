@@ -295,6 +295,18 @@ export class App extends React.Component {
 			});
 			return;
 		}
+		if(document.getElementById(nameInputID).value.length > 128){
+			this.setState((state)=>{
+				const newState={
+					...state
+				};
+				newState.formErrors = {
+					tooLongNameError: true
+				};
+				return newState;
+			});
+			return;
+		}
 		const ph=document.getElementById(phoneInputID).value;
 		if(ph.length == 0){
 			this.setState((state)=>{
@@ -311,8 +323,8 @@ export class App extends React.Component {
 		const format1 = /\+{1}\d{11}/;
 		const format2 = /\d{11}/;
 
-		if(!(format1.test(ph)&&ph.length==12) &&
-			!(format2.test(ph)&&ph.length==11)){
+		if(!(format1.test(ph)&&ph.length==12&&ph[1]=="7") &&
+			!(format2.test(ph)&&ph.length==11&&ph[0]=="8")){
 			this.setState((state)=>{
 				const newState={
 					...state
@@ -336,7 +348,18 @@ export class App extends React.Component {
 			});
 			return;
 		}
-
+		if(document.getElementById(addressInputID).value.length > 256){
+			this.setState((state)=>{
+				const newState={
+					...state
+				};
+				newState.formErrors = {
+					tooLongAddressError: true
+				};
+				return newState;
+			});
+			return;
+		}
 		// const amountOfPizza=0;
 		// const amountOfDrink=0;
 		const {productList, cart}=this.state;
@@ -362,6 +385,7 @@ export class App extends React.Component {
 		const products=[];
 		let amountOfPizza = 0;
 		let amountOfDrink = 0;
+		let orderPrice = 0;
 		for(let i=0;i<cart.length;i+=1){
 			for(let k=0;k<productList.pizza.length;k+=1){
 				if(cart[i].id==productList.pizza[k].id){
@@ -372,6 +396,7 @@ export class App extends React.Component {
 							type: "pizza"
 						});
 						amountOfPizza+=1;
+						orderPrice+=(+productList.pizza[k].price);
 					}
 				}
 			}
@@ -386,9 +411,33 @@ export class App extends React.Component {
 							type: "drink"
 						});
 						amountOfDrink+=1;
+						orderPrice+=(+productList.drinks[k].price);
 					}
 				}
 			}
+		}
+		let changeFrom = document.getElementById(needChangeFromID).value;
+		console.log("changeFrom");
+		console.log(changeFrom);
+		console.log(isNaN(changeFrom));
+		console.log(+changeFrom);
+		console.log((+changeFrom)<=0);
+		console.log((+changeFrom)<orderPrice);
+		console.log((+changeFrom)>5000);
+		if(!isNaN(changeFrom)){
+			changeFrom=parseInt(changeFrom, 10);
+		}
+		if(isNaN(changeFrom)||(+changeFrom)<=0||(+changeFrom)<orderPrice||(+changeFrom)>5000){
+			this.setState((state)=>{
+				const newState={
+					...state
+				};
+				newState.formErrors = {
+					invalidChangeFromError: true
+				};
+				return newState;
+			});
+			return;
 		}
 		if(amountOfPizza>5||amountOfDrink>4){
 			this.setState((state)=>{
@@ -463,36 +512,36 @@ export class App extends React.Component {
 
 	render() {
 		console.log("App render entered");
-		const pps = [
-			{
-				productName: "Мясная",
-				price: "765",
-				nutritionalValue: "Б: 100, Ж: 100, У: 100",
-				ccal: "684",
-				ingredients: "Неаполитанский соус, сервелат, колбаски, куриная копченая грудка."
-			},
-			{
-				productName: "Мясная",
-				price: "765",
-				nutritionalValue: "Б: 100, Ж: 100, У: 100",
-				ccal: "684",
-				ingredients: "Неаполитанский соус, сервелат, колбаски, куриная копченая грудка."
-			},
-			{
-				productName: "Мясная",
-				price: "765",
-				nutritionalValue: "Б: 100, Ж: 100, У: 100",
-				ccal: "684",
-				ingredients: "Неаполитанский соус, сервелат, колбаски, куриная копченая грудка."
-			},
-			{
-				productName: "Мясная",
-				price: "765",
-				nutritionalValue: "Б: 100, Ж: 100, У: 100",
-				ccal: "684",
-				ingredients: "Неаполитанский соус, сервелат, колбаски, куриная копченая грудка."
-			}
-		];
+		// const pps = [
+		// 	{
+		// 		productName: "Мясная",
+		// 		price: "765",
+		// 		nutritionalValue: "Б: 100, Ж: 100, У: 100",
+		// 		ccal: "684",
+		// 		ingredients: "Неаполитанский соус, сервелат, колбаски, куриная копченая грудка."
+		// 	},
+		// 	{
+		// 		productName: "Мясная",
+		// 		price: "765",
+		// 		nutritionalValue: "Б: 100, Ж: 100, У: 100",
+		// 		ccal: "684",
+		// 		ingredients: "Неаполитанский соус, сервелат, колбаски, куриная копченая грудка."
+		// 	},
+		// 	{
+		// 		productName: "Мясная",
+		// 		price: "765",
+		// 		nutritionalValue: "Б: 100, Ж: 100, У: 100",
+		// 		ccal: "684",
+		// 		ingredients: "Неаполитанский соус, сервелат, колбаски, куриная копченая грудка."
+		// 	},
+		// 	{
+		// 		productName: "Мясная",
+		// 		price: "765",
+		// 		nutritionalValue: "Б: 100, Ж: 100, У: 100",
+		// 		ccal: "684",
+		// 		ingredients: "Неаполитанский соус, сервелат, колбаски, куриная копченая грудка."
+		// 	}
+		// ];
 		const {isCartOpen, formsStatesAndSubWindows, productList, userInfo, cart, formErrors} = this.state;
 		console.log("pizza");
 		console.log(productList!==undefined?productList.pizza:"productList is undefined still");

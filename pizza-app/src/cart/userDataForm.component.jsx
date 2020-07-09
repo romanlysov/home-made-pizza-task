@@ -49,6 +49,7 @@ export function UserDataForm(props) {
 				<p>ФИО</p>
 				<StyledTextInput id={nameInputID} defaultValue={name} />
 				{formErrors.emptyNameError?<StyledErrorMessage id="name_error">Имя должно быть не пусто</StyledErrorMessage>:[]}
+				{formErrors.tooLongNameError?<StyledErrorMessage id="name_error">Длина имени не должна превышать 128 символов</StyledErrorMessage>:[]}
 				<p>Телефон</p>
 				<StyledTextInput id={phoneInputID} defaultValue={phone} />
 				{formErrors.emptyPhoneError?<StyledErrorMessage id="phone_error">Следует указать телефон</StyledErrorMessage>:[]}
@@ -56,6 +57,7 @@ export function UserDataForm(props) {
 				<p>Адрес</p>
 				<StyledTextInput id={addressInputID} defaultValue={address}/>
 				{formErrors.emptyAddressError?<StyledErrorMessage id="address_error">Следует указать адрес доставки</StyledErrorMessage>:[]}
+				{formErrors.tooLongAddressError?<StyledErrorMessage id="address_error">Длина адреса доставки не должна превышать 256 символов</StyledErrorMessage>:[]}
 				<p>Тип оплаты</p>
 				<StyledSelectField id={paymentTypeID} defaultValue={paymentType}>
 					<option value="CASH">Наличными</option>
@@ -63,6 +65,7 @@ export function UserDataForm(props) {
 				</StyledSelectField>
 				<p>Нужна сдача с</p>
 				<StyledTextInput id={needChangeFromID} defaultValue={needChangeFrom} />
+				{formErrors.invalidChangeFromError?<StyledErrorMessage id="changeFrom_error">Сумма для сдачи должна быть целым положительным числом, не более 5000</StyledErrorMessage>:[]}
 				{/* TODO: prevent from submit */}
 				<div />
 				<StyledSubmitButton id="order_submit_button" type="button" onClick={onOrderSubmit}>
