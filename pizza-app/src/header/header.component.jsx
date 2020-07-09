@@ -8,14 +8,14 @@ import {Logo} from "./logo/logo.component";
 export function Header(props){
 	console.log("Header props");
 	console.log(props);
-	const {onCartIconClick} = props;
+	const {onCartIconClick, isBasketEmpty} = props;
 	return <StyledHeader id="header_block">
 		<StyledLogoCompany>
 			<Logo />
 			<CompanyName />
 		</StyledLogoCompany>
 		<MenuAndScheduleHeader />
-		<BasketIcon onCartIconClick = {onCartIconClick} />
+		<BasketIcon onCartIconClick = {onCartIconClick} isBasketEmpty={isBasketEmpty}/>
 	</StyledHeader>;
 
 

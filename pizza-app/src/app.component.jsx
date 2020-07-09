@@ -485,6 +485,7 @@ export class App extends React.Component {
 					return;
 				}
 				this.setState((state)=>{
+
 					const {productList: productList1}=state;
 					const newState = {
 						// TODO: userInfo
@@ -548,7 +549,7 @@ export class App extends React.Component {
 		return (
 			<Router>
 				<StyledAppContainer>
-					<Header id="header" onCartIconClick = {this.cartOpeningHadler}/>
+					<Header id="header" onCartIconClick = {this.cartOpeningHadler} isBasketEmpty={cart===undefined||cart.length==0}/>
 					<DescribeFrontImage/>
 					<a name="menu"/>
 					<MenuBar id="menu_block" />
