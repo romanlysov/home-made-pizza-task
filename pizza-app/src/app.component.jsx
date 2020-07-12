@@ -270,53 +270,64 @@ export class App extends React.Component {
 		});
 	};
 
+	setErrorFlags = (errorObject) => {
+		this.setState((state)=>{
+			const newState={
+				...state
+			};
+			newState.formErrors = errorObject;
+			return newState;
+		});
+	};
+
+	countItemsOfType = (itemType, products) => {
+		const {productList, cart}=this.state;
+		let amountOfItem = 0;
+		let itemsTotalPrice = 0;
+
+		for(let i=0;i<cart.length;i+=1){
+			for(let k=0;k<productList[itemType].length;k+=1){
+				if(cart[i].id==productList[itemType][k].id){
+					for(let j=0;j<cart[i].quantity;j+=1){
+						console.log("found some coincidence");
+						products.push({
+							...productList[itemType][k],
+							// TODO: Potential problem?
+							type: (itemType=="drinks"?"drink":"pizza")
+						});
+						amountOfItem+=1;
+						itemsTotalPrice+=(+productList[itemType][k].price);
+					}
+				}
+			}
+		}
+
+		return {amountOfItem, itemsTotalPrice};
+	}
+
 	orderSubmitHandler = () => {
 		// event.preventDefault();
 		console.log("orderSubmitHandler Works!!!");
 		console.log(this.state);
 
-		this.setState((state)=>{
-			const newState={
-				...state
-			};
-			newState.formErrors = { };
-			return newState;
-		});
+		this.setErrorFlags({ });
 
 		if(document.getElementById(nameInputID).value.length == 0){
-			this.setState((state)=>{
-				const newState={
-					...state
-				};
-				newState.formErrors = {
-					emptyNameError: true
-				};
-				return newState;
+			this.setErrorFlags({
+				emptyNameError: true
 			});
 			return;
 		}
 		if(document.getElementById(nameInputID).value.length > 128){
-			this.setState((state)=>{
-				const newState={
-					...state
-				};
-				newState.formErrors = {
-					tooLongNameError: true
-				};
-				return newState;
+			this.setErrorFlags({
+				tooLongNameError: true
 			});
 			return;
 		}
 		const ph=document.getElementById(phoneInputID).value;
 		if(ph.length == 0){
-			this.setState((state)=>{
-				const newState={
-					...state
-				};
-				newState.formErrors = {
-					emptyPhoneError: true
-				};
-				return newState;
+			this.setErrorFlags({
+				emptyPhoneError: true
 			});
 			return;
 		}
@@ -325,85 +336,38 @@ export class App extends React.Component {
 
 		if(!(format1.test(ph)&&ph.length==12&&ph[1]=="7") &&
 			!(format2.test(ph)&&ph.length==11&&ph[0]=="8")){
-			this.setState((state)=>{
-				const newState={
-					...state
-				};
-				newState.formErrors = {
-					incorrectPhoneError: true
-				};
-				return newState;
+			this.setErrorFlags({
+				incorrectPhoneError: true
 			});
 			return;
 		}
 		if(document.getElementById(addressInputID).value.length == 0){
-			this.setState((state)=>{
-				const newState={
-					...state
-				};
-				newState.formErrors = {
-					emptyAddressError: true
-				};
-				return newState;
+			this.setErrorFlags({
+				emptyAddressError: true
 			});
 			return;
 		}
 		if(document.getElementById(addressInputID).value.length > 256){
-			this.setState((state)=>{
-				const newState={
-					...state
-				};
-				newState.formErrors = {
-					tooLongAddressError: true
-				};
-				return newState;
+			this.setErrorFlags({
+				tooLongAddressError: true
 			});
 			return;
 		}
-		// const amountOfPizza=0;
-		// const amountOfDrink=0;
 		const {productList, cart}=this.state;
-		/* const orderProductList = cart.reduce((accumulator, itemAndQ)=>{
-			console.log("Entered cart.reduce in order send method");
-			accumulator.push(itemAndQ.id);
-			for(let i=0;i<itemAndQ.quantity;i+=1){
-				accumulator.push(itemAndQ.id);
-			};
-		}, []); */
+
 		const products=[];
-		let amountOfPizza = 0;
-		let amountOfDrink = 0;
-		let orderPrice = 0;
-		for(let i=0;i<cart.length;i+=1){
-			for(let k=0;k<productList.pizza.length;k+=1){
-				if(cart[i].id==productList.pizza[k].id){
-					for(let j=0;j<cart[i].quantity;j+=1){
-						console.log("found some coincidence");
-						products.push({
-							...productList.pizza[k],
-							type: "pizza"
-						});
-						amountOfPizza+=1;
-						orderPrice+=(+productList.pizza[k].price);
-					}
-				}
-			}
-		}
-		for(let i=0;i<cart.length;i+=1){
-			for(let k=0;k<productList.drinks.length;k+=1){
-				if(cart[i].id==productList.drinks[k].id){
-					for(let j=0;j<cart[i].quantity;j+=1){
-						console.log("found some coincidence");
-						products.push({
-							...productList.drinks[k],
-							type: "drink"
-						});
-						amountOfDrink+=1;
-						orderPrice+=(+productList.drinks[k].price);
-					}
-				}
-			}
-		}
+		const {amountOfItem: amountOfPizza, itemsTotalPrice: pizzaPrice} = this.countItemsOfType("pizza", products);
+		const {amountOfItem: amountOfDrink, itemsTotalPrice: drinkPrice} = this.countItemsOfType("drinks", products);
+		console.log("amountOfPizza");
+		console.log(amountOfPizza);
+		console.log("pizzaPrice");
+		console.log(pizzaPrice);
+		console.log("amountOfDrink");
+		console.log(amountOfDrink);
+		console.log("drinkPrice");
+		console.log(drinkPrice);
+		
+		const orderPrice = pizzaPrice + drinkPrice;
 		let changeFrom = document.getElementById(needChangeFromID).value;
 		console.log("changeFrom");
 		console.log(changeFrom);
@@ -416,39 +380,21 @@ export class App extends React.Component {
 			changeFrom=parseInt(changeFrom, 10);
 		}
 		if(changeFrom.length!=0&&(isNaN(changeFrom)||(+changeFrom)<=0||(+changeFrom)<orderPrice||(+changeFrom)>5000)){
-			this.setState((state)=>{
-				const newState={
-					...state
-				};
-				newState.formErrors = {
-					invalidChangeFromError: true
-				};
-				return newState;
+			this.setErrorFlags({
+				invalidChangeFromError: true
 			});
 			return;
 		}
 
 		if(cart==undefined||cart.length==0){
-			this.setState((state)=>{
-				const newState={
-					...state
-				};
-				newState.formErrors = {
-					emptyCartError: true
-				};
-				return newState;
+			this.setErrorFlags({
+				emptyCartError: true
 			});
 			return;
 		}
 		if(amountOfPizza>5||amountOfDrink>4){
-			this.setState((state)=>{
-				const newState={
-					...state
-				};
-				newState.formErrors = {
-					tooManyItemsError: true
-				};
-				return newState;
+			this.setErrorFlags({
+				tooManyItemsError: true
 			});
 			return;
 		}
@@ -474,14 +420,8 @@ export class App extends React.Component {
 				console.log("Then method in orderSubmitHandler entered");
 				console.log(data);
 				if(data!==true){
-					this.setState((state)=>{
-						const newState={
-							...state
-						};
-						newState.formErrors = {
-							orderSendingError: true
-						};
-						return newState;
+					this.setErrorFlags({
+						orderSendingError: true
 					});
 					return;
 				}
@@ -508,8 +448,6 @@ export class App extends React.Component {
 				console.log("Entered exception block");
 				console.log(e);
 			});
-
-
 	}
 
 	render() {
