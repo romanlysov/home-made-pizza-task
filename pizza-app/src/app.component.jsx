@@ -363,18 +363,6 @@ export class App extends React.Component {
 		// const amountOfPizza=0;
 		// const amountOfDrink=0;
 		const {productList, cart}=this.state;
-		if(cart==undefined||cart.length==0){
-			this.setState((state)=>{
-				const newState={
-					...state
-				};
-				newState.formErrors = {
-					emptyCartError: true
-				};
-				return newState;
-			});
-			return;
-		}
 		/* const orderProductList = cart.reduce((accumulator, itemAndQ)=>{
 			console.log("Entered cart.reduce in order send method");
 			accumulator.push(itemAndQ.id);
@@ -424,16 +412,29 @@ export class App extends React.Component {
 		console.log((+changeFrom)<=0);
 		console.log((+changeFrom)<orderPrice);
 		console.log((+changeFrom)>5000);
-		if(!isNaN(changeFrom)){
+		if(changeFrom.length!=0&&!isNaN(changeFrom)){
 			changeFrom=parseInt(changeFrom, 10);
 		}
-		if(isNaN(changeFrom)||(+changeFrom)<=0||(+changeFrom)<orderPrice||(+changeFrom)>5000){
+		if(changeFrom.length!=0&&(isNaN(changeFrom)||(+changeFrom)<=0||(+changeFrom)<orderPrice||(+changeFrom)>5000)){
 			this.setState((state)=>{
 				const newState={
 					...state
 				};
 				newState.formErrors = {
 					invalidChangeFromError: true
+				};
+				return newState;
+			});
+			return;
+		}
+
+		if(cart==undefined||cart.length==0){
+			this.setState((state)=>{
+				const newState={
+					...state
+				};
+				newState.formErrors = {
+					emptyCartError: true
 				};
 				return newState;
 			});

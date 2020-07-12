@@ -65,6 +65,9 @@ export function ItemCard(props){
 					{
 						item.ccal!==undefined?(<p>{item.ccal} ккал./100 гр.</p>):""
 					}
+					{
+						item.volume!==undefined?(<p>{item.volume} л.</p>):""
+					}
 					<StyledPriceLine>
 						<StyledPrice id="menu_item_price">{item.price} руб.</StyledPrice>
 						<StyledBuyButton id="menu_item_add_to_basket_button" value={buttonID} onClick={()=>{onAddToCart(item.id);}}>
