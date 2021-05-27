@@ -3,7 +3,8 @@ import axios from 'axios';
 export const getJson = async (url) => {
 	try {
 		const response = await axios.get(url);
-		return JSON.parse(response.data);
+		return response.data;
+		// return JSON.parse(response.data);
 	} catch (e) {
 		return new Error(e);
 	}
