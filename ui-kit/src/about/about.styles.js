@@ -51,8 +51,8 @@ export const SectionContent = styled.section`
   display: flex;
   justify-content: space-between;
   
-  & div:first-child {
-    margin-right: 41px;
+  & div:last-child {
+    margin-left: 41px;
   }
 `;
 
