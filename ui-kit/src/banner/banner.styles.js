@@ -2,6 +2,7 @@ import styled from "styled-components";
 import BM from './image/BannerMain.svg';
 
 export const StyledBanner = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   background: url(${BM}) no-repeat;
