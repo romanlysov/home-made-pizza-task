@@ -65,6 +65,3 @@ export const TextContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
-export const ImageContainer = styled.div`
-`;
