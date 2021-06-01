@@ -1,12 +1,9 @@
 import styled from 'styled-components';
 
 export const Span = styled.span`
-  position: absolute;
   width: 1038px;
   height: 334px;
-  left: 381px;
-  top: 69px;
-
+  display: block;
   font-family: Roboto,sans-serif;
   font-style: normal;
   font-weight: 300;
@@ -16,12 +13,10 @@ export const Span = styled.span`
 `;
 
 export const Header = styled.header`
-  position: absolute;
   width: 187px;
   height: 36px;
-  left: 20px;
-  top: 0;
-
+  margin-bottom: 33px;
+  
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -32,19 +27,13 @@ export const Header = styled.header`
 `;
 
 export const Img = styled.img`
-  position: absolute;
   width: 320px;
   height: 483px;
-  left: 20px;
-  top: 69px;
 `;
 
 export const Button = styled.button`
-  position: absolute;
   width: 388px;
   height: 94px;
-  left: 696px;
-  top: 400px;
   background: #9B5900;
   border-radius: 20px;
 
@@ -56,4 +45,26 @@ export const Button = styled.button`
   text-align: center;
   text-transform: uppercase;
   color: aliceblue;
+`;
+
+export const SectionContent = styled.section`
+  display: flex;
+  justify-content: space-between;
+  
+  & div:first-child {
+    margin-right: 41px;
+  }
+`;
+
+export const Main = styled.main`
+  padding: 0 20px;
+`
+
+export const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const ImageContainer = styled.div`
 `;
