@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import * as S from "./about.styles";
 import image from './about-us.jpg';
 
@@ -17,4 +17,4 @@ const AboutComponent = () => {
 	);
 };
 
-export const About = AboutComponent;
+export const About = memo(AboutComponent);
