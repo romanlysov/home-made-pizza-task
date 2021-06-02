@@ -1,9 +1,10 @@
 import React, {memo} from 'react';
-import {StyledHeader, Menu, Phone, WorkTime, Basket, StyledHeaderLogo, Circle} from './header.styles';
+// eslint-disable-next-line import/named
+import {StyledHeader, Menu, Phone, WorkTime, Basket, StyledHeaderLogo, Circle, Count} from './header.styles';
 import {logoImageUrl} from './images';
 import BasketLogo from './images/Vector.svg'
 
-export const HeaderComponent = ({children}) => (<StyledHeader>
+export const HeaderComponent = ({onModalOpen, cartCount, count}) => (<StyledHeader>
 	<StyledHeaderLogo>
 		<img src={logoImageUrl} alt=""/>
 	</StyledHeaderLogo>
@@ -23,10 +24,10 @@ export const HeaderComponent = ({children}) => (<StyledHeader>
 			<span> Время Работы: <b> 09-21</b></span>
 		</WorkTime>
 	</div>
-	<Basket>
+	<Basket onModalOpen={onModalOpen} onClick={() => onModalOpen(true)} count={cartCount}>
 		<img src={BasketLogo} alt=""/>
 		<div>Корзина</div>
-		<Circle>0</Circle>
+		<Circle><Count>{count}</Count></Circle>
 	</Basket>
 </StyledHeader>
 );
