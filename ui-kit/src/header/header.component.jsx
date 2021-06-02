@@ -30,3 +30,5 @@ export const HeaderComponent = ({children}) => (<StyledHeader>
 	</Basket>
 </StyledHeader>
 );
+
+export const Header = memo(HeaderComponent);
