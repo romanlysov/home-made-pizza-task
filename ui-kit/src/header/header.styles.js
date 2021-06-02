@@ -76,3 +76,8 @@ export const Circle = styled.div`
   line-height: 30px;
   background: #FFD3A1;
 `
+
+export const Count = styled.div`
+  height: 18.08333396911621px;
+  width: 6.940025329589844px;
+`;
