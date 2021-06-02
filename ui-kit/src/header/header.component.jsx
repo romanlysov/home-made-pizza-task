@@ -1,16 +1,35 @@
-import React, { memo } from 'react';
-import { StyledHeaderLogo, StyledHeader } from './header.styles';
-import { MainMenu } from '../main-menu/main-menu.component';
-import { Phone } from '../phone/phone.component';
-import { CartButton } from '../cart-button/cart-button.component';
+import React, {memo} from 'react';
+// eslint-disable-next-line import/named
+import {StyledHeader, Menu, Phone, WorkTime, Basket, StyledHeaderLogo, Circle, Count} from './header.styles';
+import {logoImageUrl} from './images';
+import BasketLogo from './images/Vector.svg'
 
-const HeaderComponent = ({ menuItems, cartCount, onModalOpen, renderLinkWrapper, menuColor }) => (
-	<StyledHeader>
-		<StyledHeaderLogo />
-		<MainMenu menu={menuItems} renderLinkWrapper={renderLinkWrapper} color={menuColor} idPrefix="header" />
-		<Phone phone="8-800-555-35-35" />
-		<CartButton count={cartCount} onModalOpen={onModalOpen} />
-	</StyledHeader>
+export const HeaderComponent = ({onModalOpen, cartCount, count}) => (<StyledHeader>
+	<StyledHeaderLogo>
+		<img src={logoImageUrl} alt=""/>
+	</StyledHeaderLogo>
+	<Menu>
+		<ul className="Menu">
+			<li><a href="">Пиццы</a></li>
+			<li><a href="">Напитки</a></li>
+			<li><a href="">Доставка</a></li>
+			<li><a href="">О нас</a></li>
+		</ul>
+	</Menu>
+	<div>
+		<Phone>
+			<span>8-800-555-35-35</span>
+		</Phone>
+		<WorkTime>
+			<span> Время Работы: <b> 09-21</b></span>
+		</WorkTime>
+	</div>
+	<Basket onModalOpen={onModalOpen} onClick={() => onModalOpen(true)} count={cartCount}>
+		<img src={BasketLogo} alt=""/>
+		<div>Корзина</div>
+		<Circle><Count>{count}</Count></Circle>
+	</Basket>
+</StyledHeader>
 );
 
 export const Header = memo(HeaderComponent);

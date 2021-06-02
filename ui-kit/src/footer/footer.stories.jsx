@@ -1,9 +1,8 @@
 import React from 'react';
-import { Footer } from './footer.component';
-import { menuStub } from '../../data-stub';
+import { FooterComponent } from './footer.component';
 
 export default {
-	title: 'Footer',
+    title: 'footer',
 };
 
-export const defaultFooter = () => <Footer menuItems={menuStub} />;
+export const footer = () => <FooterComponent> </FooterComponent>;

@@ -1,15 +1,7 @@
 import React from 'react';
-import { Banner } from './banner.component';
-import { defaultViewport } from '../../viewports';
+import {BannerComponent} from './banner.component';
 
-export default {
-	title: 'Banner',
-	parameters: {
-		viewport: {
-			viewports: { '1440': defaultViewport },
-			defaultViewport: '1440',
-		},
-	},
+export default {title: 'Banner',
 };
 
-export const defaultBanner = () => <Banner />;
+export const defaultBanner = () => <BannerComponent> </BannerComponent>;
